@@ -1,0 +1,25 @@
+{
+  "name": "testy1-santa",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "remotion studio",
+    "build": "remotion render MaidFairy out/maid-fairy.mp4",
+    "preview": "remotion studio"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://local_proxy@127.0.0.1:36087/git/fitkidznj-commits/Testy1-Santa"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@remotion/cli": "4.0.463",
+    "@remotion/renderer": "4.0.463",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "remotion": "4.0.463"
+  }
+}
