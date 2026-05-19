@@ -47,9 +47,8 @@ This is your escape.
 This... is Treasure Harbor.\
 """
 
-# Voice chosen for warm, cinematic emotional depth
-# "Rachel" — clear, expressive, ideal for travel/resort advertising
-VOICE_ID = "21m00Tcm4TlvDq8ikWAM"  # Rachel
+# Voice from ElevenLabs voice library — selected for this commercial
+VOICE_ID = "TABZn6CDfjMNGrsnGzzD"
 
 # Emotional voice settings:
 #   stability low  → more expressive, varied delivery
