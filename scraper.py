@@ -324,11 +324,18 @@ def scrape_website(url: str, session: requests.Session) -> dict:
     except Exception:
         pass
 
-    for page_url in pages_to_try:
+    homepage_failed = False
+    for i, page_url in enumerate(pages_to_try):
+        # If the homepage itself hard-failed, skip subpages — same block will apply
+        if i > 0 and homepage_failed:
+            break
+
         html, _ = fetch_html(page_url, session)
         _rate_limit()
 
         if html is None:
+            if i == 0:
+                homepage_failed = True
             continue
 
         if result["email"] is None:
