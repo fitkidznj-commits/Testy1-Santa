@@ -1,6 +1,5 @@
 __pycache__/
 *.pyc
 members.csv
-members_updated.csv
 scrape_checkpoint.json
 scrape_log.txt
