@@ -1,0 +1,6 @@
+models/
+*.MOV
+*.mov
+source/
+/tmp/
+__pycache__/
