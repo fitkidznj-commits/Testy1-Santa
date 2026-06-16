@@ -1,5 +1,6 @@
-# Heavy / regenerable build inputs and intermediates
-voices/                 # ~130MB neural TTS models (re-download per README)
+# Heavy / regenerable build inputs and intermediates.
+# ~130MB neural TTS models (re-download per README):
+voices/
 build/preview/
 build/vo/
 build/vo_reel/
