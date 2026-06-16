@@ -1,0 +1,9 @@
+# Heavy / regenerable build inputs and intermediates
+voices/                 # ~130MB neural TTS models (re-download per README)
+build/preview/
+build/vo/
+build/vo_reel/
+build/vo_teaser/
+build/*.wav
+**/__pycache__/
+*.pyc
