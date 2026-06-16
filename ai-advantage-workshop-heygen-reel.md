@@ -2,8 +2,8 @@
 
 **Brand:** a.i. STARR
 **Goal:** Drive workshop sign-ups before July 11 (urgency: only 20 seats).
-**Format:** Instagram Reel — 9:16 vertical, 1080×1920, ~52 seconds.
-**Cast:** Dan (custom avatar, cloned voice) + AI STARR (branded co-host avatar).
+**Format:** Instagram Reel — 9:16 vertical, 1080×1920, ~40 seconds.
+**Cast:** Dan — single presenter, using your existing avatar + cloned voice.
 **Captions:** Burned-in (Reels watched on mute) — auto-generate, then proofread the date and price.
 
 ---
@@ -26,26 +26,25 @@
 
 ## HeyGen setup checklist
 
-1. **Clone Dan's voice** — Voices → Create Voice → upload a clean ~2-min recording (quiet room, single take, natural pace). Name it `Dan – a.i. STARR`.
-2. **Build Dan's avatar** — Instant Avatar from a 2-min phone/webcam clip (good lighting, neutral background). Assign the cloned voice.
-3. **Build AI STARR avatar** — custom or polished stock avatar; assign a distinct voice so the two co-hosts are clearly different.
-4. **New 9:16 project** — two speakers/scenes, drop in the script below.
-5. **Add brand elements** — a.i. STARR logo (persistent), tropical/beach background matching the flyer palette, light upbeat music bed (~15% volume).
+Avatar and voice are already done — this is a fast build:
+
+1. **New 9:16 project** — select your existing avatar + cloned voice.
+2. **Paste the script** below as one continuous take.
+3. **Add brand elements** — a.i. STARR logo (persistent), tropical/beach background matching the flyer palette, light upbeat music bed (~15% volume).
+4. **Add the on-screen text + QR end card** per the shot list.
 
 ---
 
 ## Scene-by-scene shot list
 
-| # | Time | Speaker | Line | On-screen text | Visual / motion |
-|---|------|---------|------|----------------|-----------------|
-| 1 | 0:00–0:03 | DAN | "Hey, I'm Dan with a.i. STARR." | a.i. STARR logo | Dan center frame, friendly wave |
-| 2 | 0:03–0:09 | AI STARR | "And I'm your AI co-host! We've got something for anyone who wants to get ahead with AI — without the overwhelm." | — | Cut to AI STARR, energetic |
-| 3 | 0:09–0:14 | DAN | "It's The A.I. Advantage Workshop — two hours of practical, ready-to-use tools." | **THE A.I. ADVANTAGE WORKSHOP** | Title pops in, bold |
-| 4 | 0:14–0:22 | AI STARR | "ChatGPT, Gemini, and Claude — the exact tricks to save time, boost productivity, and grow your business. No jargon. No fluff." | ChatGPT · Gemini · Claude logos flash | Three logos animate in |
-| 5 | 0:22–0:29 | DAN | "Join us Saturday, July 11th, 9 to 11 AM, right here in Islamorada." | **JULY 11 · 9–11 AM · ISLAMORADA MM87** | Date card, tropical accent |
-| 6 | 0:29–0:36 | AI STARR | "It's just $39 — and we're capped at 20 seats, so they'll go fast!" | **$39 · ONLY 20 SEATS** | Price + scarcity, attention pulse |
-| 7 | 0:36–0:43 | DAN | "Scan the code or call 305-697-9207 to grab your spot." | QR code + **305.697.9207** | End-card builds in |
-| 8 | 0:43–0:47 | BOTH | "See you there!" | a.i. STARR logo + email | Both avatars, smile, hold end card |
+| # | Time | Line | On-screen text | Visual / motion |
+|---|------|------|----------------|-----------------|
+| 1 | 0:00–0:05 | "Hey, I'm Dan with a.i. STARR — and if you want to get ahead with AI without the overwhelm, this is for you." | a.i. STARR logo | Avatar center frame, friendly wave |
+| 2 | 0:05–0:11 | "It's The A.I. Advantage Workshop — two hours of practical, ready-to-use tools." | **THE A.I. ADVANTAGE WORKSHOP** | Title pops in, bold |
+| 3 | 0:11–0:19 | "ChatGPT, Gemini, and Claude — the exact tricks to save time, boost productivity, and grow your business. No jargon. No fluff." | ChatGPT · Gemini · Claude logos flash | Three logos animate in |
+| 4 | 0:19–0:26 | "Join us Saturday, July 11th, 9 to 11 AM, right here in Islamorada." | **JULY 11 · 9–11 AM · ISLAMORADA MM87** | Date card, tropical accent |
+| 5 | 0:26–0:33 | "It's just $39 — and we're capped at 20 seats, so they'll go fast." | **$39 · ONLY 20 SEATS** | Price + scarcity, attention pulse |
+| 6 | 0:33–0:40 | "Scan the code or call 305-697-9207 to grab your spot. See you there!" | QR code + **305.697.9207** | End-card builds in, smile, hold |
 
 **End card hold:** QR code, 305.697.9207, YouraiSTaRR@gmail.com, a.i. STARR logo.
 
@@ -53,23 +52,19 @@
 
 ## Clean script (copy/paste into HeyGen)
 
-**DAN:** Hey, I'm Dan with a.i. STARR.
+Hey, I'm Dan with a.i. STARR — and if you want to get ahead with AI without the overwhelm, this is for you.
 
-**AI STARR:** And I'm your AI co-host! We've got something for anyone who wants to get ahead with AI — without the overwhelm.
+It's The A.I. Advantage Workshop — two hours of practical, ready-to-use tools.
 
-**DAN:** It's The A.I. Advantage Workshop — two hours of practical, ready-to-use tools.
+ChatGPT, Gemini, and Claude — the exact tricks to save time, boost productivity, and grow your business. No jargon. No fluff.
 
-**AI STARR:** ChatGPT, Gemini, and Claude — the exact tricks to save time, boost productivity, and grow your business. No jargon. No fluff.
+Join us Saturday, July 11th, 9 to 11 AM, right here in Islamorada.
 
-**DAN:** Join us Saturday, July 11th, 9 to 11 AM, right here in Islamorada.
+It's just $39 — and we're capped at 20 seats, so they'll go fast.
 
-**AI STARR:** It's just $39 — and we're capped at 20 seats, so they'll go fast!
+Scan the code or call 305-697-9207 to grab your spot. See you there!
 
-**DAN:** Scan the code or call 305-697-9207 to grab your spot.
-
-**BOTH:** See you there!
-
-> Keep beats to 1–2 sentences with a brief gesture/pause between speakers — avatars read most naturally this way.
+> Keep beats to 1–2 sentences with a natural pause between lines — avatars read most naturally this way.
 
 ---
 
@@ -94,5 +89,4 @@
 - [ ] Phone **305.697.9207** and email correct on end card.
 - [ ] QR code scans and points to the sign-up destination.
 - [ ] Captions proofread (auto-caption often misspells brand names).
-- [ ] Dan's and AI STARR's voices are clearly distinct.
-- [ ] Music bed low enough that voices stay clear.
+- [ ] Music bed low enough that the voice stays clear.
