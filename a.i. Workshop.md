@@ -91,3 +91,53 @@ NOTES:
 - Have the flyer's **QR image** ready to drop into the placeholder, and grab the
   official **ChatGPT / Gemini / Claude** logos for scene 3.
 - Use `/hyperframes-cli preview` to check timing before the final `render`.
+
+---
+
+## Teaser variant (20 seconds — Stories & paid ads)
+
+A punchier cut for top-of-funnel placements. Same brand and facts, fewer beats,
+faster pacing. Paste into `/hyperframes`.
+
+```
+ROLE: You are a senior brand-motion designer and direct-response marketer.
+Produce a fast, scroll-stopping 20-second vertical teaser ad for a local AI workshop.
+
+OBJECTIVE: Stop the scroll in <1.5s and drive a tap to learn more / sign up.
+Optimized for Instagram Stories and paid ads — punchy, high-energy, one CTA.
+
+DELIVERABLE SPEC:
+- Aspect ratio: 9:16 vertical, 1080x1920.
+- Duration: 18–20 seconds, 30fps.
+- Burned-in captions on every line (watched muted).
+- Output: MP4.
+
+BRAND IDENTITY ("a.i. STARR"):
+- Tropical Florida Keys vibe. Palette: cream/off-white, coral-salmon red,
+  teal/turquoise, sand; subtle palm silhouettes. Bold rounded display headlines,
+  clean sans-serif details. Friendly, confident, energetic.
+
+MOTION STYLE:
+- Rapid kinetic typography, snappy beats (~3s each), tight easing, coral/teal
+  accent wipes. Energetic but legible — large text, high contrast.
+
+SCENE STRUCTURE (on-screen text + optional voiceover):
+1. HOOK (0:00–0:03) — "GET AHEAD WITH AI." (full-screen, bold). a.i. STARR mark.
+   VO: "Get ahead with AI — the easy way."
+2. WHAT (0:03–0:08) — "THE A.I. ADVANTAGE WORKSHOP" + small logos: ChatGPT ·
+   Gemini · Claude. VO: "Master ChatGPT, Gemini, and Claude in two hours."
+3. WHEN/WHERE + OFFER (0:08–0:14) — "JULY 11 · ISLAMORADA · $39" with
+   "ONLY 20 SEATS" pulsing. VO: "July 11th in Islamorada. Just $39 — only 20 seats."
+4. CTA / END CARD (0:14–0:20) — QR placeholder + "CALL 305.697.9207" +
+   "a.i. STARR". Hold. VO: "Scan or call to grab your spot!"
+
+HARD REQUIREMENTS (verify exactly):
+- Date: July 11. Location: Islamorada (MM87 optional at this size). Price: $39.
+  Seats: 20. Phone: 305.697.9207. Email: YouraiSTaRR@gmail.com. Brand: a.i. STARR.
+- Reserve a marked QR placeholder box.
+- Keep text inside safe margins (avoid top ~12% / bottom ~12% for Stories UI).
+
+NOTES:
+- Front-load the value; assume most viewers drop after 5 seconds.
+- Prioritize one clear CTA over extra detail.
+```
