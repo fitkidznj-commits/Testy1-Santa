@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="./gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body {
+        margin: 0; width: 1080px; height: 1920px; overflow: hidden;
+        background: #FBF3E7;
+      }
+      body { font-family: "Helvetica Neue", Arial, sans-serif; color: #2B2B2B; -webkit-font-smoothing: antialiased; }
+
+      /* palette: cream #FBF3E7  coral #E2685C  deep coral #D7544A
+         teal #2FA39A  dark teal #1F7A73  ink #2B2B2B */
+
+      .fill { position: absolute; inset: 0; }
+      .bg-base {
+        background:
+          radial-gradient(900px 900px at 18% 6%, rgba(226,104,92,0.16), transparent 60%),
+          radial-gradient(1000px 1000px at 90% 40%, rgba(47,163,154,0.16), transparent 62%),
+          linear-gradient(180deg, #FCF5EA 0%, #FBF1E2 60%, #F7E9D4 100%);
+      }
+      .blob { position: absolute; border-radius: 50%; filter: blur(8px); opacity: 0.5; }
+      /* soft floor so a lower-third avatar reads cleanly */
+      .floor { position: absolute; left: 0; right: 0; bottom: 0; height: 760px;
+        background: linear-gradient(180deg, rgba(251,241,226,0) 0%, rgba(247,231,209,0.55) 60%, rgba(244,224,196,0.85) 100%); }
+
+      /* CONTENT ZONE — upper area only; lower ~760px kept clear for the avatar */
+      .zone { position: absolute; top: 150px; left: 0; right: 0; height: 1010px;
+        display: grid; place-items: center; text-align: center; padding: 0 110px; box-sizing: border-box; }
+
+      .chip { position: absolute; top: 60px; left: 0; right: 0; text-align: center;
+        font-size: 32px; font-weight: 900; letter-spacing: 1px; color: #2B2B2B; opacity: 0.85; }
+      .chip .dot { color: #E2685C; }
+
+      .brand-lockup { font-size: 132px; font-weight: 900; letter-spacing: 1px; line-height: 1; }
+      .brand-lockup .dot { color: #E2685C; } .brand-lockup .star { color: #2FA39A; }
+      .lockup-tag { margin-top: 28px; font-size: 40px; font-weight: 700; color: #1F7A73; letter-spacing: 3px; text-transform: uppercase; }
+
+      .eyebrow { font-size: 30px; font-weight: 800; letter-spacing: 8px; text-transform: uppercase; color: #2FA39A; }
+      .h-title { font-size: 116px; font-weight: 900; line-height: 0.98; letter-spacing: -2px; color: #2B2B2B; text-transform: uppercase; }
+      .h-title .accent { color: #E2685C; }
+      .title-sub { font-size: 46px; font-weight: 600; color: #1F7A73; margin-top: 30px; }
+
+      .pill-row { display: flex; flex-direction: column; gap: 30px; align-items: center; }
+      .pill { font-size: 64px; font-weight: 900; letter-spacing: 1px; padding: 26px 78px; border-radius: 999px;
+        background: #FFFFFF; box-shadow: 0 18px 50px rgba(43,43,43,0.10); border: 3px solid rgba(47,163,154,0.25); }
+      .pill.c1 { color: #1F7A73; } .pill.c2 { color: #D7544A; } .pill.c3 { color: #2B2B2B; }
+
+      .date-card { background: #FFFFFF; border-radius: 44px; padding: 80px 76px;
+        box-shadow: 0 28px 70px rgba(43,43,43,0.12); border: 4px solid rgba(226,104,92,0.18);
+        display: flex; flex-direction: column; gap: 14px; align-items: center; }
+      .d-day { font-size: 48px; font-weight: 800; letter-spacing: 6px; color: #2FA39A; text-transform: uppercase; }
+      .d-date { font-size: 158px; font-weight: 900; line-height: 0.92; color: #D7544A; }
+      .d-time { font-size: 60px; font-weight: 800; color: #2B2B2B; }
+      .d-loc { font-size: 42px; font-weight: 600; color: #1F7A73; margin-top: 6px; }
+
+      .price { font-size: 360px; font-weight: 900; line-height: 0.9; color: #D7544A; letter-spacing: -6px; }
+      .seats { margin-top: 14px; font-size: 56px; font-weight: 900; letter-spacing: 2px; color: #FFFFFF;
+        background: #2FA39A; padding: 22px 64px; border-radius: 999px; text-transform: uppercase; }
+
+      .qr-box { width: 320px; height: 320px; border-radius: 32px; background: #FFFFFF; border: 6px dashed #2FA39A;
+        display: grid; place-items: center; margin: 0 auto 22px; box-shadow: 0 18px 50px rgba(43,43,43,0.10); }
+      .qr-box span { font-size: 88px; font-weight: 900; color: #2FA39A; letter-spacing: 4px; }
+      .cta-phone { font-size: 76px; font-weight: 900; color: #D7544A; letter-spacing: 1px; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="40"
+      data-width="1080" data-height="1920"
+      style="position: relative; width: 1080px; height: 1920px; overflow: hidden">
+
+      <!-- Track 1: shared tropical background (full frame) -->
+      <div id="bg" class="clip fill bg-base" data-start="0" data-duration="40" data-track-index="1">
+        <div class="blob" style="width: 480px; height: 480px; top: -120px; left: -140px; background: rgba(226,104,92,0.30);"></div>
+        <div class="blob" style="width: 520px; height: 520px; top: 240px; right: -180px; background: rgba(47,163,154,0.28);"></div>
+        <svg id="palmL" width="460" height="560" viewBox="0 0 200 260" style="position:absolute; top:60px; left:-60px; opacity:0.09;">
+          <g fill="#1F7A73">
+            <path d="M100 260 C96 190 92 150 96 110 L104 110 C108 150 104 190 100 260 Z"/>
+            <ellipse cx="100" cy="104" rx="78" ry="20" transform="rotate(8 100 104)"/>
+            <ellipse cx="100" cy="104" rx="78" ry="20" transform="rotate(52 100 104)"/>
+            <ellipse cx="100" cy="104" rx="78" ry="20" transform="rotate(96 100 104)"/>
+            <ellipse cx="100" cy="104" rx="78" ry="20" transform="rotate(140 100 104)"/>
+            <ellipse cx="100" cy="104" rx="78" ry="20" transform="rotate(184 100 104)"/>
+            <circle cx="100" cy="104" r="10"/>
+          </g>
+        </svg>
+        <svg id="palmR" width="400" height="500" viewBox="0 0 200 260" style="position:absolute; top:-20px; right:-30px; opacity:0.08; transform: scaleX(-1);">
+          <g fill="#D7544A">
+            <path d="M100 260 C96 190 92 150 96 110 L104 110 C108 150 104 190 100 260 Z"/>
+            <ellipse cx="100" cy="104" rx="78" ry="20" transform="rotate(8 100 104)"/>
+            <ellipse cx="100" cy="104" rx="78" ry="20" transform="rotate(52 100 104)"/>
+            <ellipse cx="100" cy="104" rx="78" ry="20" transform="rotate(96 100 104)"/>
+            <ellipse cx="100" cy="104" rx="78" ry="20" transform="rotate(140 100 104)"/>
+            <ellipse cx="100" cy="104" rx="78" ry="20" transform="rotate(184 100 104)"/>
+            <circle cx="100" cy="104" r="10"/>
+          </g>
+        </svg>
+        <div class="floor"></div>
+      </div>
+
+      <!-- Track 2: persistent brand chip (top) -->
+      <div id="brand-chip" class="clip chip" data-start="5" data-duration="35" data-track-index="2">
+        a<span class="dot">.</span>i<span class="dot">.</span> STARR
+      </div>
+
+      <!-- Track 3: scene plates (upper zone only) -->
+
+      <!-- S1 0–5: brand opener (hook is spoken) -->
+      <div id="s1" class="clip zone scene1" data-start="0" data-duration="5" data-track-index="3">
+        <div>
+          <div class="brand-lockup">a<span class="dot">.</span>i<span class="star">.</span> STARR</div>
+          <div class="lockup-tag s1-tag">The A.I. Advantage</div>
+        </div>
+      </div>
+
+      <!-- S2 5–11: workshop title -->
+      <div id="s2" class="clip zone scene2" data-start="5" data-duration="6" data-track-index="3">
+        <div>
+          <div class="eyebrow s2-ey" style="margin-bottom: 36px;">The Workshop</div>
+          <div class="h-title">The A<span class="accent">.</span>I<span class="accent">.</span><br/>Advantage<br/>Workshop</div>
+          <div class="title-sub">Tips &amp; Tricks to Get Ahead</div>
+        </div>
+      </div>
+
+      <!-- S3 11–19: tools -->
+      <div id="s3" class="clip zone scene3" data-start="11" data-duration="8" data-track-index="3">
+        <div class="pill-row">
+          <div class="pill c1 s3p">ChatGPT</div>
+          <div class="pill c2 s3p">Gemini</div>
+          <div class="pill c3 s3p">Claude</div>
+        </div>
+      </div>
+
+      <!-- S4 19–26: details -->
+      <div id="s4" class="clip zone scene4" data-start="19" data-duration="7" data-track-index="3">
+        <div class="date-card s4-card">
+          <div class="d-day">Saturday</div>
+          <div class="d-date">July 11</div>
+          <div class="d-time">9 – 11 AM</div>
+          <div class="d-loc">Islamorada · MM87</div>
+        </div>
+      </div>
+
+      <!-- S5 26–33: offer -->
+      <div id="s5" class="clip zone scene5" data-start="26" data-duration="7" data-track-index="3">
+        <div>
+          <div class="price s5-price">$39</div>
+          <div class="seats s5-seats">Only 20 seats</div>
+        </div>
+      </div>
+
+      <!-- S6 33–40: CTA -->
+      <div id="s6" class="clip zone scene6" data-start="33" data-duration="7" data-track-index="3">
+        <div>
+          <div class="qr-box s6-qr"><span>QR</span></div>
+          <div class="cta-phone s6-phone">305.697.9207</div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      const E = "power3.out";
+
+      tl.fromTo("#palmL", { x: -10, y: 8 }, { x: 22, y: -8, duration: 40, ease: "sine.inOut" }, 0);
+      tl.fromTo("#palmR", { x: 10, y: -6 }, { x: -20, y: 6, duration: 40, ease: "sine.inOut" }, 0);
+      tl.fromTo(".chip", { opacity: 0, y: -14 }, { opacity: 0.85, y: 0, duration: 0.6, ease: E }, 5);
+
+      /* S1 */
+      tl.fromTo(".scene1 .brand-lockup", { opacity: 0, y: 40, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 0.9, ease: E }, 0.2);
+      tl.fromTo(".s1-tag", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.7, ease: E }, 0.8);
+      tl.to(".scene1", { opacity: 0, duration: 0.5, ease: "power2.in" }, 4.5);
+      tl.set(".scene1", { opacity: 0 }, 5.0);
+
+      /* S2 */
+      tl.fromTo(".s2-ey", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: E }, 5.2);
+      tl.fromTo(".scene2 .h-title", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.9, ease: E }, 5.4);
+      tl.fromTo(".scene2 .title-sub", { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.7, ease: E }, 6.0);
+      tl.to(".scene2", { opacity: 0, duration: 0.5, ease: "power2.in" }, 10.5);
+      tl.set(".scene2", { opacity: 0 }, 11.0);
+
+      /* S3 */
+      tl.fromTo(".s3p", { opacity: 0, y: 40, scale: 0.92 }, { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: "back.out(1.4)", stagger: 0.5 }, 11.4);
+      tl.to(".scene3", { opacity: 0, duration: 0.5, ease: "power2.in" }, 18.5);
+      tl.set(".scene3", { opacity: 0 }, 19.0);
+
+      /* S4 */
+      tl.fromTo(".s4-card", { opacity: 0, y: 60, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "back.out(1.2)" }, 19.3);
+      tl.fromTo(".s4-card .d-date", { scale: 0.82 }, { scale: 1, duration: 0.7, ease: "back.out(1.6)" }, 19.7);
+      tl.to(".scene4", { opacity: 0, duration: 0.5, ease: "power2.in" }, 25.5);
+      tl.set(".scene4", { opacity: 0 }, 26.0);
+
+      /* S5 */
+      tl.fromTo(".s5-price", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.8, ease: "back.out(1.7)" }, 26.4);
+      tl.fromTo(".s5-seats", { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.6, ease: E }, 27.2);
+      tl.to(".s5-seats", { scale: 1.06, duration: 0.5, ease: "sine.inOut", yoyo: true, repeat: 4 }, 27.9);
+      tl.to(".scene5", { opacity: 0, duration: 0.5, ease: "power2.in" }, 32.5);
+      tl.set(".scene5", { opacity: 0 }, 33.0);
+
+      /* S6 */
+      tl.fromTo(".s6-qr", { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.7, ease: "back.out(1.4)" }, 33.4);
+      tl.fromTo(".s6-phone", { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.6, ease: E }, 33.9);
+      tl.to(".s6-phone", { scale: 1.05, duration: 0.5, ease: "sine.inOut", yoyo: true, repeat: 3 }, 35.2);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
