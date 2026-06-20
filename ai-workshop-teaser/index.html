@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="./gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #FBF3E7; }
+      body { font-family: "Helvetica Neue", Arial, sans-serif; color: #2B2B2B; -webkit-font-smoothing: antialiased; }
+
+      .fill { position: absolute; inset: 0; }
+      .bg-base {
+        background:
+          radial-gradient(900px 900px at 18% 6%, rgba(226,104,92,0.16), transparent 60%),
+          radial-gradient(1000px 1000px at 90% 40%, rgba(47,163,154,0.16), transparent 62%),
+          linear-gradient(180deg, #FCF5EA 0%, #FBF1E2 60%, #F7E9D4 100%);
+      }
+      .blob { position: absolute; border-radius: 50%; filter: blur(8px); opacity: 0.5; }
+      .floor { position: absolute; left: 0; right: 0; bottom: 0; height: 760px;
+        background: linear-gradient(180deg, rgba(251,241,226,0) 0%, rgba(247,231,209,0.55) 60%, rgba(244,224,196,0.85) 100%); }
+
+      .zone { position: absolute; top: 150px; left: 0; right: 0; height: 1010px;
+        display: grid; place-items: center; text-align: center; padding: 0 110px; box-sizing: border-box; }
+
+      .chip { position: absolute; top: 60px; left: 0; right: 0; text-align: center;
+        font-size: 32px; font-weight: 900; letter-spacing: 1px; color: #2B2B2B; opacity: 0.85; }
+      .chip .dot { color: #E2685C; }
+
+      .brand-lockup { font-size: 128px; font-weight: 900; letter-spacing: 1px; line-height: 1; }
+      .brand-lockup .dot { color: #E2685C; } .brand-lockup .star { color: #2FA39A; }
+      .lockup-tag { margin-top: 26px; font-size: 40px; font-weight: 700; color: #1F7A73; letter-spacing: 3px; text-transform: uppercase; }
+
+      .eyebrow { font-size: 30px; font-weight: 800; letter-spacing: 8px; text-transform: uppercase; color: #2FA39A; }
+      .h-title { font-size: 112px; font-weight: 900; line-height: 0.98; letter-spacing: -2px; color: #2B2B2B; text-transform: uppercase; }
+      .h-title .accent { color: #E2685C; }
+      .tools-line { margin-top: 34px; font-size: 50px; font-weight: 800; color: #1F7A73; letter-spacing: 1px; }
+      .tools-line .sep { color: #E2685C; }
+
+      .date-line { font-size: 78px; font-weight: 900; color: #2B2B2B; letter-spacing: 1px; }
+      .date-line .accent { color: #2FA39A; }
+      .loc-line { margin-top: 14px; font-size: 46px; font-weight: 700; color: #1F7A73; }
+      .price { margin-top: 28px; font-size: 300px; font-weight: 900; line-height: 0.9; color: #D7544A; letter-spacing: -6px; }
+      .seats { margin-top: 10px; font-size: 52px; font-weight: 900; letter-spacing: 2px; color: #FFFFFF;
+        background: #2FA39A; padding: 20px 56px; border-radius: 999px; text-transform: uppercase; }
+
+      .cta-lead { font-size: 64px; font-weight: 900; color: #2B2B2B; margin-bottom: 30px; }
+      .qr-box { width: 300px; height: 300px; border-radius: 30px; background: #FFFFFF; border: 6px dashed #2FA39A;
+        display: grid; place-items: center; margin: 0 auto 22px; box-shadow: 0 18px 50px rgba(43,43,43,0.10); }
+      .qr-box span { font-size: 84px; font-weight: 900; color: #2FA39A; letter-spacing: 4px; }
+      .cta-phone { font-size: 72px; font-weight: 900; color: #D7544A; letter-spacing: 1px; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="20"
+      data-width="1080" data-height="1920"
+      style="position: relative; width: 1080px; height: 1920px; overflow: hidden">
+
+      <!-- Track 1: background -->
+      <div id="bg" class="clip fill bg-base" data-start="0" data-duration="20" data-track-index="1">
+        <div class="blob" style="width: 480px; height: 480px; top: -120px; left: -140px; background: rgba(226,104,92,0.30);"></div>
+        <div class="blob" style="width: 520px; height: 520px; top: 240px; right: -180px; background: rgba(47,163,154,0.28);"></div>
+        <svg id="palmL" width="460" height="560" viewBox="0 0 200 260" style="position:absolute; top:60px; left:-60px; opacity:0.09;">
+          <g fill="#1F7A73">
+            <path d="M100 260 C96 190 92 150 96 110 L104 110 C108 150 104 190 100 260 Z"/>
+            <ellipse cx="100" cy="104" rx="78" ry="20" transform="rotate(8 100 104)"/>
+            <ellipse cx="100" cy="104" rx="78" ry="20" transform="rotate(52 100 104)"/>
+            <ellipse cx="100" cy="104" rx="78" ry="20" transform="rotate(96 100 104)"/>
+            <ellipse cx="100" cy="104" rx="78" ry="20" transform="rotate(140 100 104)"/>
+            <ellipse cx="100" cy="104" rx="78" ry="20" transform="rotate(184 100 104)"/>
+            <circle cx="100" cy="104" r="10"/>
+          </g>
+        </svg>
+        <svg id="palmR" width="400" height="500" viewBox="0 0 200 260" style="position:absolute; top:-20px; right:-30px; opacity:0.08; transform: scaleX(-1);">
+          <g fill="#D7544A">
+            <path d="M100 260 C96 190 92 150 96 110 L104 110 C108 150 104 190 100 260 Z"/>
+            <ellipse cx="100" cy="104" rx="78" ry="20" transform="rotate(8 100 104)"/>
+            <ellipse cx="100" cy="104" rx="78" ry="20" transform="rotate(52 100 104)"/>
+            <ellipse cx="100" cy="104" rx="78" ry="20" transform="rotate(96 100 104)"/>
+            <ellipse cx="100" cy="104" rx="78" ry="20" transform="rotate(140 100 104)"/>
+            <ellipse cx="100" cy="104" rx="78" ry="20" transform="rotate(184 100 104)"/>
+            <circle cx="100" cy="104" r="10"/>
+          </g>
+        </svg>
+        <div class="floor"></div>
+      </div>
+
+      <!-- Track 2: brand chip -->
+      <div id="brand-chip" class="clip chip" data-start="4" data-duration="16" data-track-index="2">
+        a<span class="dot">.</span>i<span class="dot">.</span> STARR
+      </div>
+
+      <!-- Track 3: scenes -->
+
+      <!-- S1 0–4: hook / brand -->
+      <div id="s1" class="clip zone scene1" data-start="0" data-duration="4" data-track-index="3">
+        <div>
+          <div class="brand-lockup">a<span class="dot">.</span>i<span class="star">.</span> STARR</div>
+          <div class="lockup-tag s1-tag">Get ahead with A.I.</div>
+        </div>
+      </div>
+
+      <!-- S2 4–9: title + tools -->
+      <div id="s2" class="clip zone scene2" data-start="4" data-duration="5" data-track-index="3">
+        <div>
+          <div class="eyebrow s2-ey" style="margin-bottom: 32px;">The Workshop</div>
+          <div class="h-title">The A<span class="accent">.</span>I<span class="accent">.</span><br/>Advantage</div>
+          <div class="tools-line s2-tools">ChatGPT <span class="sep">·</span> Gemini <span class="sep">·</span> Claude</div>
+        </div>
+      </div>
+
+      <!-- S3 9–14: date + price -->
+      <div id="s3" class="clip zone scene3" data-start="9" data-duration="5" data-track-index="3">
+        <div>
+          <div class="date-line s3-date">July 11 <span class="accent">·</span> Islamorada</div>
+          <div class="loc-line s3-loc">Saturday · 9–11 AM · MM87</div>
+          <div class="price s3-price">$39</div>
+        </div>
+      </div>
+
+      <!-- S4 14–20: CTA -->
+      <div id="s4" class="clip zone scene4" data-start="14" data-duration="6" data-track-index="3">
+        <div>
+          <div class="cta-lead s4-lead">Only 20 seats</div>
+          <div class="qr-box s4-qr"><span>QR</span></div>
+          <div class="cta-phone s4-phone">305.697.9207</div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      const E = "power3.out";
+
+      tl.fromTo("#palmL", { x: -8, y: 6 }, { x: 16, y: -6, duration: 20, ease: "sine.inOut" }, 0);
+      tl.fromTo("#palmR", { x: 8, y: -4 }, { x: -14, y: 4, duration: 20, ease: "sine.inOut" }, 0);
+      tl.fromTo(".chip", { opacity: 0, y: -14 }, { opacity: 0.85, y: 0, duration: 0.5, ease: E }, 4);
+
+      /* S1 */
+      tl.fromTo(".scene1 .brand-lockup", { opacity: 0, y: 36, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 0.7, ease: E }, 0.15);
+      tl.fromTo(".s1-tag", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.5, ease: E }, 0.7);
+      tl.to(".scene1", { opacity: 0, duration: 0.4, ease: "power2.in" }, 3.6);
+      tl.set(".scene1", { opacity: 0 }, 4.0);
+
+      /* S2 */
+      tl.fromTo(".s2-ey", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.45, ease: E }, 4.2);
+      tl.fromTo(".scene2 .h-title", { opacity: 0, y: 44 }, { opacity: 1, y: 0, duration: 0.7, ease: E }, 4.35);
+      tl.fromTo(".s2-tools", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.55, ease: E }, 4.9);
+      tl.to(".scene2", { opacity: 0, duration: 0.4, ease: "power2.in" }, 8.6);
+      tl.set(".scene2", { opacity: 0 }, 9.0);
+
+      /* S3 */
+      tl.fromTo(".s3-date", { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 0.55, ease: E }, 9.2);
+      tl.fromTo(".s3-loc", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.5, ease: E }, 9.5);
+      tl.fromTo(".s3-price", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.7, ease: "back.out(1.7)" }, 9.9);
+      tl.to(".scene3", { opacity: 0, duration: 0.4, ease: "power2.in" }, 13.6);
+      tl.set(".scene3", { opacity: 0 }, 14.0);
+
+      /* S4 */
+      tl.fromTo(".s4-lead", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: E }, 14.2);
+      tl.fromTo(".s4-qr", { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.4)" }, 14.5);
+      tl.fromTo(".s4-phone", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: E }, 14.9);
+      tl.to(".s4-phone", { scale: 1.05, duration: 0.5, ease: "sine.inOut", yoyo: true, repeat: 3 }, 16.0);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
