@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hammer Head Group — 30-Day Social Media Approval</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#EFEADF;font-family:'Barlow',sans-serif;color:#16233F;overflow-x:hidden}
+a{color:#E4211F}a:hover{color:#b81417}
+.cond{font-family:'Barlow Condensed',sans-serif}
+
+/* ===== tracker (sticky) ===== */
+.tracker{position:sticky;top:0;z-index:60;background:#052A6E;color:#EFEADF;display:flex;align-items:center;gap:20px;padding:12px 28px;flex-wrap:wrap;box-shadow:0 4px 18px rgba(5,42,110,.28)}
+.tstat{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;letter-spacing:.5px;text-transform:uppercase;color:#9fb3d6;white-space:nowrap}
+.tstat b{font-size:19px;margin-right:2px}
+.tstat.ok b{color:#7ee0a0}.tstat.no b{color:#ff9a8f}.tstat.pd b{color:#F2B84B}
+.tspacer{flex:1}
+.sendbtn{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:14px;letter-spacing:1px;text-transform:uppercase;background:#E4211F;color:#fff;border:none;border-radius:22px;padding:10px 22px;cursor:pointer;transition:.15s}
+.sendbtn:hover{background:#f5372f}
+
+/* ===== header ===== */
+.head{padding:56px 40px 10px;max-width:1160px;margin:0 auto}
+.brandbar{display:flex;align-items:center;gap:26px}
+.blogo{width:96px;height:96px;border-radius:16px;box-shadow:0 10px 30px rgba(5,42,110,.28);display:flex;align-items:center;justify-content:center;background:#052A6E;color:#EFEADF;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:30px;letter-spacing:1px;flex:none;position:relative;overflow:hidden}
+.blogo::after{content:"";position:absolute;left:0;right:0;bottom:0;height:8px;background:#E4211F}
+.htitle{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:52px;line-height:.94;letter-spacing:-.5px;color:#052A6E;text-transform:uppercase}
+.hsub{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:18px;letter-spacing:3px;text-transform:uppercase;color:#E4211F;margin-top:6px}
+.hmeta{font-size:15px;color:#5a6473;margin-top:12px;max-width:640px;line-height:1.55}
+.howto{max-width:1160px;margin:26px auto 0;padding:0 40px}
+.howcard{background:#FBF9F4;border:1px solid #e2dccd;border-left:5px solid #F2B84B;border-radius:14px;padding:18px 22px;display:flex;gap:22px;flex-wrap:wrap}
+.howstep{flex:1;min-width:190px}
+.hownum{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:15px;color:#fff;background:#052A6E;width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;margin-bottom:8px}
+.howstep p{margin:0;font-size:14px;line-height:1.5;color:#41485a}
+.howstep b{color:#052A6E;font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.5px}
+
+/* ===== week banners & sections ===== */
+.wrap{max-width:1160px;margin:0 auto;padding:0 40px 120px}
+.sectitle{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:15px;letter-spacing:4px;text-transform:uppercase;color:#8a94a3;margin:64px 0 24px;display:flex;align-items:center;gap:14px}
+.sectitle::after{content:"";flex:1;height:2px;background:#d9d2c4}
+.weekban{display:flex;align-items:baseline;gap:16px;background:#052A6E;color:#EFEADF;border-radius:14px;padding:16px 24px;margin:38px 0 22px;flex-wrap:wrap}
+.wknum{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:24px;letter-spacing:1px;color:#fff}
+.wkfocus{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:18px;text-transform:uppercase;letter-spacing:2px;color:#F2B84B}
+.wkdays{margin-left:auto;font-size:13px;letter-spacing:2px;text-transform:uppercase;color:#9fb3d6;font-weight:600}
+
+/* ===== review card ===== */
+.rev{background:#FBF9F4;border:1px solid #e2dccd;border-radius:18px;padding:26px;margin-bottom:22px;display:grid;grid-template-columns:360px 1fr;gap:34px;align-items:start;scroll-margin-top:88px;transition:border-color .15s,box-shadow .15s}
+.rev.is-ok{border-color:#1E7A46;box-shadow:0 0 0 1px #1E7A46 inset}
+.rev.is-no{border-color:#E4211F;box-shadow:0 0 0 1px #E4211F inset}
+.postcol{width:360px}
+.infocol{min-width:0;align-self:stretch;display:flex;flex-direction:column}
+.daybadge{display:flex;align-items:baseline;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.dnum{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:28px;color:#052A6E;text-transform:uppercase;letter-spacing:.5px;line-height:1}
+.dfocus{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#C68A45}
+.dtype{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#fff;background:#8a94a3;border-radius:20px;padding:3px 10px}
+.dtype.vid{background:#E4211F}
+.caplbl{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#8a94a3;margin-bottom:6px}
+.captxt{font-size:15.5px;line-height:1.6;color:#3a4453;margin:0}
+.approve{margin-top:auto;padding-top:20px}
+.aprompt{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#8a94a3;margin-bottom:10px}
+.btnrow{display:flex;gap:10px;flex-wrap:wrap}
+.apbtn{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:15px;letter-spacing:.5px;text-transform:uppercase;border:2px solid #c7bfae;background:#fff;color:#41485a;border-radius:24px;padding:9px 22px;cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:7px}
+.apbtn.okb:hover{border-color:#1E7A46;color:#1E7A46}
+.apbtn.nob:hover{border-color:#E4211F;color:#E4211F}
+.rev.is-ok .apbtn.okb{background:#1E7A46;border-color:#1E7A46;color:#fff}
+.rev.is-no .apbtn.nob{background:#E4211F;border-color:#E4211F;color:#fff}
+.editwrap{margin-top:14px;display:none}
+.rev.is-no .editwrap{display:block}
+.editlbl{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#E4211F;margin-bottom:7px}
+.editnote{width:100%;min-height:76px;resize:vertical;border:1.5px solid #d9d2c4;border-radius:11px;padding:11px 13px;font-family:'Barlow',sans-serif;font-size:14.5px;color:#16233F;background:#fff;line-height:1.5}
+.editnote:focus{outline:none;border-color:#E4211F;box-shadow:0 0 0 3px rgba(228,33,31,.12)}
+
+/* ===== POST GRAPHIC (from campaign board) ===== */
+.post{position:relative;width:360px;height:360px;border-radius:16px;overflow:hidden;box-shadow:0 8px 26px rgba(5,42,110,.16);background:#0b1f45}
+.post.deep{background:#04204F}
+.slot{position:absolute;inset:0}
+.fillimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#0b1f45;display:block}
+.gridimg{width:100%;height:100%;object-fit:cover;display:block;background:#0b1f45}
+.phbox{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;background:linear-gradient(135deg,#0b2350,#04204F);color:#7FA0D8;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:15px;letter-spacing:1px;text-transform:uppercase;line-height:1.3}
+.phbox::before{content:"◇";position:absolute;top:16px;left:16px;font-size:16px;opacity:.5}
+.pc{position:absolute;inset:0;padding:28px;display:flex;flex-direction:column;pointer-events:none;z-index:3}
+.scrim{position:absolute;inset:0;pointer-events:none;z-index:2}
+.scrim.b{background:linear-gradient(180deg,rgba(4,24,64,.15) 0%,rgba(4,24,64,.35) 45%,rgba(4,24,64,.9) 100%)}
+.scrim.t{background:linear-gradient(180deg,rgba(4,24,64,.72) 0%,rgba(4,24,64,.15) 40%,rgba(4,24,64,.05) 100%)}
+.mark{position:absolute;top:18px;right:18px;width:44px;height:44px;border-radius:9px;z-index:4;box-shadow:0 3px 10px rgba(0,0,0,.3);background:#052A6E;color:#EFEADF;display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:13px;letter-spacing:.5px;border-bottom:4px solid #E4211F}
+.pk{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;letter-spacing:3px;text-transform:uppercase}
+.ph{font-family:'Barlow Condensed',sans-serif;font-weight:900;text-transform:uppercase;line-height:.9;letter-spacing:-.3px}
+.psub{font-family:'Barlow',sans-serif;font-weight:500;line-height:1.35}
+.ondark{color:#F6F1E6}.ondarksub{color:#cdd7e8}
+.push{margin-top:auto}
+.stars{font-size:22px;letter-spacing:3px;color:#F2B84B}
+.qtext{font-family:'Barlow Condensed',sans-serif;font-weight:700;line-height:1.05;color:#F6F1E6;text-transform:uppercase;letter-spacing:-.2px}
+.qby{font-family:'Barlow',sans-serif;font-weight:600;font-size:13px;color:#F2B84B;margin-top:14px}
+.opts{display:flex;flex-direction:column;gap:9px;margin-top:14px}
+.opt{background:rgba(251,249,244,.16);border:1.5px solid rgba(246,241,230,.55);border-radius:11px;padding:11px 15px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:17px;letter-spacing:.5px;text-transform:uppercase;color:#F6F1E6;display:flex;align-items:center;gap:10px}
+.optic{font-size:19px}
+.play{width:70px;height:70px;border-radius:50%;background:rgba(228,33,31,.95);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.35)}
+.playtri{width:0;height:0;border-top:15px solid transparent;border-bottom:15px solid transparent;border-left:24px solid #fff;margin-left:6px}
+.baA{position:absolute;top:0;left:0;width:100%;height:50%}
+.baB{position:absolute;bottom:0;left:0;width:100%;height:50%}
+.balbl{position:absolute;z-index:4;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:15px;letter-spacing:3px;text-transform:uppercase;color:#fff;background:rgba(4,24,64,.7);padding:4px 12px;border-radius:6px}
+.balbl.a{top:16px;left:16px}
+.balbl.b{bottom:66px;left:16px;background:#E4211F}
+.bahead{position:absolute;z-index:5;left:0;right:0;bottom:0;padding:20px 24px;background:linear-gradient(180deg,transparent,rgba(4,24,64,.92));pointer-events:none}
+.badiv{position:absolute;left:0;right:0;top:50%;height:4px;background:#EFEADF;z-index:4;transform:translateY(-2px)}
+
+/* ===== storyboards ===== */
+.frames{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:6px}
+.frame{position:relative}
+.fbox{position:relative;width:100%;aspect-ratio:16/9;border-radius:11px;overflow:hidden;background:#0a1a3a;box-shadow:0 4px 14px rgba(5,42,110,.16)}
+.fnum{position:absolute;top:8px;left:8px;z-index:5;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:12px;color:#fff;background:rgba(4,24,64,.7);width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.fovr{position:absolute;inset:0;z-index:4;display:flex;align-items:flex-end;padding:10px;pointer-events:none;background:linear-gradient(180deg,transparent 45%,rgba(4,24,64,.82))}
+.fostext{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:13px;text-transform:uppercase;color:#F2B84B;line-height:1;letter-spacing:.5px}
+.fdesc{font-size:11.5px;color:#5a6473;line-height:1.4;margin-top:8px}
+.fdesc b{color:#16233F;font-weight:700;font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.5px;display:block}
+.sbmeta{font-size:14px;color:#5a6473;margin:2px 0 18px;line-height:1.55}
+.sbmeta b{color:#052A6E}
+.endcard{background:#052A6E;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:#fff;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:11px;text-align:center;padding:8px}
+.endcard .em{font-size:22px}
+
+/* ===== report modal ===== */
+.modal{position:fixed;inset:0;z-index:100;background:rgba(5,20,50,.6);display:none;align-items:center;justify-content:center;padding:24px}
+.modal.open{display:flex}
+.mcard{background:#FBF9F4;border-radius:18px;max-width:640px;width:100%;max-height:88vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 60px rgba(5,42,110,.4)}
+.mhead{background:#052A6E;color:#EFEADF;padding:20px 26px}
+.mhead h3{margin:0;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:24px;text-transform:uppercase;letter-spacing:.5px}
+.mhead p{margin:6px 0 0;font-size:13px;color:#9fb3d6}
+.mbody{padding:22px 26px;overflow:auto}
+.report{width:100%;min-height:240px;border:1.5px solid #d9d2c4;border-radius:11px;padding:14px;font-family:'SFMono-Regular',Menlo,Consolas,monospace;font-size:12.5px;line-height:1.6;color:#16233F;background:#fff;resize:vertical}
+.mfoot{padding:16px 26px;border-top:1px solid #e2dccd;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.mbtn{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:14px;letter-spacing:.5px;text-transform:uppercase;border:none;border-radius:22px;padding:10px 20px;cursor:pointer}
+.mbtn.primary{background:#E4211F;color:#fff}.mbtn.primary:hover{background:#b81417}
+.mbtn.ghost{background:#fff;border:2px solid #c7bfae;color:#41485a}.mbtn.ghost:hover{border-color:#052A6E;color:#052A6E}
+.mbtn.close{margin-left:auto;background:transparent;color:#8a94a3}
+.copied{font-size:13px;color:#1E7A46;font-weight:700;font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:1px;opacity:0;transition:.2s}
+.copied.show{opacity:1}
+.mlbl{display:block;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#8a94a3;margin:16px 0 6px}
+.mlbl.first{margin-top:0}
+.mlbl .opt{color:#c7bfae}
+.minput{width:100%;border:1.5px solid #d9d2c4;border-radius:10px;padding:10px 12px;font-family:'Barlow',sans-serif;font-size:15px;color:#16233F;background:#fff}
+.minput:focus{outline:none;border-color:#052A6E;box-shadow:0 0 0 3px rgba(5,42,110,.1)}
+.mta{min-height:64px;resize:vertical;line-height:1.5}
+.msuccess{padding:26px;background:#EDF6EF;color:#1E7A46;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:18px;letter-spacing:.5px;text-align:center}
+.msuccess small{display:block;margin-top:6px;font-weight:600;font-size:13px;color:#3a7a54;font-family:'Barlow',sans-serif;letter-spacing:0}
+.savehint{position:fixed;bottom:16px;left:16px;z-index:80;background:#052A6E;color:#EFEADF;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;letter-spacing:1px;text-transform:uppercase;padding:7px 14px;border-radius:16px;opacity:0;transition:.25s;pointer-events:none}
+.savehint.show{opacity:.94}
+.offline{background:#FCEDEC!important}
+
+@media(max-width:820px){
+  .rev{grid-template-columns:1fr;gap:22px}
+  .postcol{width:100%;max-width:360px;margin:0 auto}
+  .htitle{font-size:40px}
+  .head,.howto,.wrap{padding-left:20px;padding-right:20px}
+  .frames{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<div class="tracker">
+  <span class="tstat ok"><b id="cOk">0</b>Approved</span>
+  <span class="tstat no"><b id="cNo">0</b>Need edits</span>
+  <span class="tstat pd"><b id="cPd">0</b>Pending</span>
+  <span class="tspacer"></span>
+  <button class="sendbtn" id="sendTop">Review &amp; Send Results</button>
+</div>
+
+<div class="head">
+  <div class="brandbar">
+    <div class="blogo">HHG</div>
+    <div>
+      <div class="htitle">30-Day Social Media Plan</div>
+      <div class="hsub">Hammer Head Group · Painting &amp; Remodeling</div>
+      <div class="hmeta">A full month of Facebook content for your review — 30 daily posts plus 4 weekly highlight videos. Please look through each day, read the caption, view the image, and let us know if it's approved or needs a change. Hamilton, NJ · Mercer County.</div>
+    </div>
+  </div>
+</div>
+
+<div class="howto">
+  <div class="howcard">
+    <div class="howstep"><span class="hownum">1</span><p><b>Review each day</b> Read the caption and look at the post image on the left.</p></div>
+    <div class="howstep"><span class="hownum">2</span><p><b>Approve or request edits</b> Hit Approve, or tap "Request edits" and type what you'd like changed.</p></div>
+    <div class="howstep"><span class="hownum">3</span><p><b>Auto-saved</b> Your choices save in this browser — you can stop and come back anytime.</p></div>
+    <div class="howstep"><span class="hownum">4</span><p><b>Send it back</b> When you're done, hit "Review &amp; Send Results" up top to send us your feedback.</p></div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<div class="weekban"><span class="wknum">WEEK 1</span><span class="wkfocus">Kitchen Remodeling</span><span class="wkdays">Days 1–7</span></div>
+
+<div class="rev" data-day="01">
+  <div class="postcol"><div class="post"><div class="slot"><img class="fillimg" src="https://lh3.googleusercontent.com/d/1u2ANz8wMkHu22MdytTWiUtHqIG29GPKN=w1200" alt="Team on a job site"></div><div class="scrim b"></div><div class="mark">HHG</div><div class="pc"><div class="push"><div class="pk ondarksub" style="color:#F2B84B">Grateful for</div><div class="ph ondark" style="font-size:44px">A crew that treats every home like their own</div></div></div></div></div>
+  <div class="infocol"><div class="caplbl">Caption</div><p class="captxt">Kicking off the month grateful for a crew that treats every home like their own. Thank you to our HHG team for the craftsmanship and care you bring daily.</p></div>
+</div>
+
+<div class="rev" data-day="02">
+  <div class="postcol"><div class="post"><div class="slot"><img class="fillimg" src="https://lh3.googleusercontent.com/d/1pPW6elvINm3pf4suygZORjJ29fMIjpIq=w1200" alt="Hamilton / Mercer County scenic"></div><div class="scrim b"></div><div class="mark">HHG</div><div class="pc"><div class="push"><div class="ph ondark" style="font-size:46px">Proud to call Hamilton home</div><div class="psub ondarksub" style="margin-top:10px;font-size:15px">Mercer County — what's your favorite local spot?</div></div></div></div></div>
+  <div class="infocol"><div class="caplbl">Caption</div><p class="captxt">Proud to call Hamilton, NJ home. Mercer County, what's your favorite local spot? Drop it below — we might just feature it!</p></div>
+</div>
+
+<div class="rev" data-day="03">
+  <div class="postcol"><div class="post"><div class="slot"><img class="fillimg" src="https://lh3.googleusercontent.com/d/1FpGoXfT-ptzefAWVxpaS9lr1bBHgs1jB=w1200" alt="Kitchen hardware detail"></div><div class="scrim b"></div><div class="mark">HHG</div><div class="pc"><div class="push"><div class="pk ondarksub" style="color:#F2B84B">Kitchen tip</div><div class="ph ondark" style="font-size:36px">Small hardware swaps, big impact</div><div class="psub ondarksub" style="margin-top:10px;font-size:14px">New cabinet pulls modernize a space without a full remodel.</div></div></div></div></div>
+  <div class="infocol"><div class="caplbl">Caption</div><p class="captxt">Kitchen tip: small cabinet hardware swaps can modernize a space without a full remodel. Sometimes it's the little details that make the biggest impact.</p></div>
+</div>
+
+<div class="rev" data-day="04">
+  <div class="postcol"><div class="post deep"><div class="baA"><div class="phbox">Before — dated kitchen</div></div><div class="baB"><img class="fillimg" src="https://lh3.googleusercontent.com/d/1FpGoXfT-ptzefAWVxpaS9lr1bBHgs1jB=w1200" alt="AFTER — finished kitchen"></div><div class="badiv"></div><span class="balbl a">Before</span><span class="balbl b">After</span><div class="mark" style="top:auto;bottom:16px;right:16px">HHG</div><div class="bahead"><div class="ph ondark" style="font-size:30px">Dated to dream kitchen</div></div></div></div>
+  <div class="infocol"><div class="caplbl">Caption · Before/After</div><p class="captxt">From dated to dream kitchen. Swipe to see this Hamilton home's transformation from our latest kitchen remodel.</p></div>
+</div>
+
+<div class="rev" data-day="05" data-type="video">
+  <div class="postcol"><div class="post"><div class="slot"><img class="fillimg" src="https://lh3.googleusercontent.com/d/1FpGoXfT-ptzefAWVxpaS9lr1bBHgs1jB=w1200" alt="Finished kitchen — video still"></div><div class="scrim t"></div><div class="scrim b"></div><div class="mark">HHG</div><div class="pc"><div style="margin:auto"><div class="play"><div class="playtri"></div></div></div><div><div class="pk ondarksub" style="color:#F2B84B">Weekly Highlight · Wk 1</div><div class="ph ondark" style="font-size:38px">Kitchen remodeling</div><div class="psub ondarksub" style="margin-top:8px;font-size:14px">From outdated to unforgettable · Hamilton, NJ</div></div></div></div></div>
+  <div class="infocol"><div class="caplbl">Caption · Highlight Video</div><p class="captxt">This kitchen went from forgotten to favorite room in the house. See the full transformation — and let's talk about yours.</p></div>
+</div>
+
+<div class="rev" data-day="06">
+  <div class="postcol"><div class="post"><div class="slot"><img class="fillimg" src="https://lh3.googleusercontent.com/d/1u2ANz8wMkHu22MdytTWiUtHqIG29GPKN=w1200" alt="Finished kitchen"></div><div class="scrim b"></div><div class="mark">HHG</div><div class="pc"><div class="push"><div class="stars">★★★★★</div><div class="qtext" style="margin-top:8px;font-size:22px">HHG turned our outdated kitchen into the heart of our home.</div><div class="qby">— The [Last Name] Family · Hamilton, NJ</div></div></div></div></div>
+  <div class="infocol"><div class="caplbl">Caption · Testimonial</div><p class="captxt">"HHG turned our outdated kitchen into the heart of our home." Thank you to the [Last Name] family for trusting us with your remodel!</p></div>
+</div>
+
+<div class="rev" data-day="07">
+  <div class="postcol"><div class="post"><div class="slot"><img class="fillimg" src="https://lh3.googleusercontent.com/d/1pPW6elvINm3pf4suygZORjJ29fMIjpIq=w1200" alt="Kitchen shot"></div><div class="scrim b"></div><div class="mark">HHG</div><div class="pc"><div class="push"><div class="pk ondarksub" style="opacity:.85">Tell us in the comments</div><div class="ph ondark" style="font-size:38px">If you could remodel one room tomorrow…</div><div class="opts"><div class="opt"><span class="optic">🍳</span>Kitchen</div><div class="opt"><span class="optic">🛁</span>Bathroom</div><div class="opt"><span class="optic">✨</span>Something else</div></div></div></div></div></div>
+  <div class="infocol"><div class="caplbl">Caption · Engagement</div><p class="captxt">If you could remodel one room in your home tomorrow, which would it be — kitchen, bath, or something else? Tell us in the comments!</p></div>
+</div>
+
+<div class="weekban"><span class="wknum">WEEK 2</span><span class="wkfocus">Bathroom Remodeling</span><span class="wkdays">Days 8–14</span></div>
+
+<div class="rev" data-day="08">
+  <div class="postcol"><div class="post"><div class="slot"><img class="fillimg" src="https://lh3.googleusercontent.com/d/1n5-o2RVLJJztOFUpRV-JHcTsxUXOZzAs=w1200" alt="Team + client handshake"></div><div class="scrim b"></div><div class="mark">HHG</div><div class="pc"><div class="push"><div class="pk ondarksub" style="color:#F2B84B">Grateful for</div><div class="ph ondark" style="font-size:44px">The trust you place in us</div></div></div></div></div>
+  <div class="infocol"><div class="caplbl">Caption</div><p class="captxt">Grateful for every homeowner who invites us into their space and trusts us with their vision. That trust is everything to us.</p></div>
+</div>
+
+<div class="rev" data-day="09">
+  <div class="postcol"><div class="post"><div class="slot"><img class="fillimg" src="https://lh3.googleusercontent.com/d/1ZDLnVVKniY0pclPyjBVWrrqR-i1iXVDl=w1200" alt="Measuring & planning phase"></div><div class="scrim b"></div><div class="mark">HHG</div><div class="pc"><div class="push"><div class="pk ondarksub" style="color:#F2B84B">Before the transformation</div><div class="ph ondark" style="font-size:38px">Measure, plan, design — every detail</div></div></div></div></div>
+  <div class="infocol"><div class="caplbl">Caption</div><p class="captxt">A look at what happens before the transformation — measuring, planning, and designing every detail so the install goes smoothly.</p></div>
+</div>
+
+<div class="rev" data-day="10">
+  <div class="postcol"><div class="post"><div class="slot"><img class="fillimg" src="https://lh3.googleusercontent.com/d/1XHGxMomY36SPwA7vgqhNk5s-APHwXL5w=w1200" alt="Finished bathroom"></div><div class="scrim b"></div><div class="mark">HHG</div><div class="pc"><div class="push"><div class="pk ondarksub" style="color:#F2B84B">Did you know?</div><div class="ph ondark" style="font-size:34px">A bathroom remodel is one of the highest-ROI projects in the home</div></div></div></div></div>
+  <div class="infocol"><div class="caplbl">Caption</div><p class="captxt">Did you know a well-planned bathroom remodel can be one of the highest ROI home improvement projects? Function and value, all in one space.</p></div>
+</div>
+
+<div class="rev" data-day="11">
+  <div class="postcol"><div class="post deep"><div class="baA"><img class="fillimg" src="https://lh3.googleusercontent.com/d/1xLaH36u-PNS5PAWxpK1AYuoWv47iNNRN=w1200" alt="BEFORE — dated bathroom"></div><div class="baB"><img class="fillimg" src="https://lh3.googleusercontent.com/d/1XHGxMomY36SPwA7vgqhNk5s-APHwXL5w=w1200" alt="AFTER — spa-like bath"></div><div class="badiv"></div><span class="balbl a">Before</span><span class="balbl b">After</span><div class="mark" style="top:auto;bottom:16px;right:16px">HHG</div><div class="bahead"><div class="ph ondark" style="font-size:30px">Luxury spa vibes, at home</div></div></div></div>
+  <div class="infocol"><div class="caplbl">Caption · Before/After</div><p class="captxt">Luxury spa vibes, right at home. Swipe through this bathroom transformation in Mercer County.</p></div>
+</div>
+
+<div class="rev" data-day="12" data-type="video">
+  <div class="postcol"><div class="post"><div class="slot"><img class="fillimg" src="https://lh3.googleusercontent.com/d/1d-WjONU-wmGIjTgKWNEUvw5aUimXX3TP=w1200" alt="Finished bathroom — video still"></div><div class="scrim t"></div><div class="scrim b"></div><div class="mark">HHG</div><div class="pc"><div style="margin:auto"><div class="play"><div class="playtri"></div></div></div><div><div class="pk ondarksub" style="color:#F2B84B">Weekly Highlight · Wk 2</div><div class="ph ondark" style="font-size:38px">Bathroom remodeling</div><div class="psub ondarksub" style="margin-top:8px;font-size:14px">Your everyday spa, right at home</div></div></div></div></div>
+  <div class="infocol"><div class="caplbl">Caption · Highlight Video</div><p class="captxt">Luxury doesn't have to mean leaving the house. Take a look at this bathroom transformation in Mercer County.</p></div>
+</div>
+
+<div class="rev" data-day="13">
+  <div class="postcol"><div class="post"><div class="slot"><img class="fillimg" src="https://lh3.googleusercontent.com/d/1gz_cpu854RwALabhB1ILFf3N2QuR1LhJ=w1200" alt="With a local supplier / partner"></div><div class="scrim b"></div><div class="mark">HHG</div><div class="pc"><div class="push"><div class="ph ondark" style="font-size:42px">It takes a community to build something beautiful</div></div></div></div></div>
+  <div class="infocol"><div class="caplbl">Caption</div><p class="captxt">Shoutout to the local suppliers and tradespeople who help us bring every project to life. It takes a team — and a community.</p></div>
+</div>
+
+<div class="rev" data-day="14">
+  <div class="postcol"><div class="post"><div class="slot"><img class="fillimg" src="https://lh3.googleusercontent.com/d/1XHGxMomY36SPwA7vgqhNk5s-APHwXL5w=w1200" alt="Bathroom feature shot"></div><div class="scrim b"></div><div class="mark">HHG</div><div class="pc"><div class="push"><div class="pk ondarksub" style="opacity:.85">Poll · pick one</div><div class="ph ondark" style="font-size:38px">Your dream bathroom feature?</div><div class="opts"><div class="opt"><span class="optic">🛁</span>Soaking tub</div><div class="opt"><span class="optic">🚿</span>Walk-in shower</div><div class="opt"><span class="optic">🔥</span>Heated floors</div></div></div></div></div></div>
+  <div class="infocol"><div class="caplbl">Caption · Poll</div><p class="captxt">Poll: what's your dream bathroom feature — soaking tub, walk-in shower, or heated floors?</p></div>
+</div>
+
+<div class="weekban"><span class="wknum">WEEK 3</span><span class="wkfocus">Interior &amp; Exterior Painting</span><span class="wkdays">Days 15–21</span></div>
+
+<div class="rev" data-day="15">
+  <div class="postcol"><div class="post"><div class="slot"><div class="phbox">Painter mid-project</div></div><div class="scrim b"></div><div class="mark">HHG</div><div class="pc"><div class="push"><div class="pk ondarksub" style="color:#F2B84B">Grateful for</div><div class="ph ondark" style="font-size:42px">Transforming homes, one coat at a time</div></div></div></div></div>
+  <div class="infocol"><div class="caplbl">Caption</div><p class="captxt">Thankful for another beautiful week of transforming homes across Mercer County. Grateful for the trust our clients place in us, one coat at a time.</p></div>
+</div>
+
+<div class="rev" data-day="16">
+  <div class="postcol"><div class="post"><div class="slot"><div class="phbox">Paint color swatches</div></div><div class="scrim b"></div><div class="mark">HHG</div><div class="pc"><div class="push"><div class="pk ondarksub" style="color:#F2B84B">Painting tip</div><div class="ph ondark" style="font-size:34px">Test your color in the room's real light</div><div class="psub ondarksub" style="margin-top:10px;font-size:14px">Colors shift dramatically from morning to evening — sample before you commit.</div></div></div></div></div>
+  <div class="infocol"><div class="caplbl">Caption</div><p class="captxt">Painting tip: always test your paint color in the actual room lighting before committing — colors can shift dramatically from morning to evening light.</p></div>
+</div>
+
+<div class="rev" data-day="17">
+  <div class="postcol"><div class="post deep"><div class="baA"><div class="phbox">Before — exterior</div></div><div class="baB"><div class="phbox">After — repainted exterior</div></div><div class="badiv"></div><span class="balbl a">Before</span><span class="balbl b">After</span><div class="mark" style="top:auto;bottom:16px;right:16px">HHG</div><div class="bahead"><div class="ph ondark" style="font-size:30px">Curb appeal, refreshed</div></div></div></div>
+  <div class="infocol"><div class="caplbl">Caption · Before/After</div><p class="captxt">One of our favorite exterior transformations this year. Curb appeal, refreshed.</p></div>
+</div>
+
+<div class="rev" data-day="18">
+  <div class="postcol"><div class="post"><div class="slot"><div class="phbox">Exterior painting — finished</div></div><div class="scrim b"></div><div class="mark">HHG</div><div class="pc"><div class="push"><div class="stars">★★★★★</div><div class="qtext" style="margin-top:8px;font-size:22px">The attention to detail on our exterior paint job was incredible.</div><div class="qby">— A grateful Mercer County homeowner</div></div></div></div></div>
+  <div class="infocol"><div class="caplbl">Caption · Testimonial</div><p class="captxt">"The attention to detail on our exterior paint job was incredible." Thank you for the kind words and for choosing HHG!</p></div>
+</div>
+
+<div class="rev" data-day="19" data-type="video">
+  <div class="postcol"><div class="post"><div class="slot"><div class="phbox">Interior + exterior — video still</div></div><div class="scrim t"></div><div class="scrim b"></div><div class="mark">HHG</div><div class="pc"><div style="margin:auto"><div class="play"><div class="playtri"></div></div></div><div><div class="pk ondarksub" style="color:#F2B84B">Weekly Highlight · Wk 3</div><div class="ph ondark" style="font-size:34px">Interior &amp; exterior painting</div><div class="psub ondarksub" style="margin-top:8px;font-size:14px">A fresh coat changes everything</div></div></div></div></div>
+  <div class="infocol"><div class="caplbl">Caption · Highlight Video</div><p class="captxt">Inside and out, a fresh coat of paint can completely transform a home. Here's some of our recent work in Hamilton.</p></div>
+</div>
+
+<div class="rev" data-day="20">
+  <div class="postcol"><div class="post"><div class="slot"><img class="fillimg" src="https://lh3.googleusercontent.com/d/12q8y1w8EwdfejUoQtWPT_2jzQd2V0uEF=w1200" alt="Prep / taping work"></div><div class="scrim b"></div><div class="mark">HHG</div><div class="pc"><div class="push"><div class="pk ondarksub" style="color:#F2B84B">Behind the scenes</div><div class="ph ondark" style="font-size:38px">Prep is where the magic happens</div></div></div></div></div>
+  <div class="infocol"><div class="caplbl">Caption</div><p class="captxt">Prep work is where the magic really happens. Our team never cuts corners, even on the steps you don't see in the final reveal.</p></div>
+</div>
+
+<div class="rev" data-day="21">
+  <div class="postcol"><div class="post"><div class="slot"><div class="phbox">Hamilton neighborhood</div></div><div class="scrim b"></div><div class="mark">HHG</div><div class="pc"><div class="push"><div class="ph ondark" style="font-size:42px">Part of the Hamilton community for years</div></div></div></div></div>
+  <div class="infocol"><div class="caplbl">Caption</div><p class="captxt">Grateful to be part of the Hamilton, NJ community for years. Thank you to every neighbor who's welcomed us into your home.</p></div>
+</div>
+
+<div class="weekban"><span class="wknum">WEEK 4</span><span class="wkfocus">Flooring &amp; Custom Carpentry</span><span class="wkdays">Days 22–28</span></div>
+
+<div class="rev" data-day="22">
+  <div class="postcol"><div class="post"><div class="slot"><img class="fillimg" src="https://lh3.googleusercontent.com/d/1g6v7w4wAxtT2pyuqVsxhWTf6cFrZuM2l=w1200" alt="Team group photo"></div><div class="scrim b"></div><div class="mark">HHG</div><div class="pc"><div class="push"><div class="pk ondarksub" style="color:#F2B84B">Grateful for</div><div class="ph ondark" style="font-size:44px">Our incredible team</div></div></div></div></div>
+  <div class="infocol"><div class="caplbl">Caption</div><p class="captxt">As the month winds down, we're reflecting on how grateful we are for our incredible team and the homeowners who welcome us in.</p></div>
+</div>
+
+<div class="rev" data-day="23">
+  <div class="postcol"><div class="post"><div class="slot"><div class="phbox">Refinished hardwood floor</div></div><div class="scrim b"></div><div class="mark">HHG</div><div class="pc"><div class="push"><div class="pk ondarksub" style="color:#F2B84B">Flooring tip</div><div class="ph ondark" style="font-size:38px">Refinish instead of replace</div><div class="psub ondarksub" style="margin-top:10px;font-size:14px">Refinishing hardwood saves time and money — and brings back the original beauty.</div></div></div></div></div>
+  <div class="infocol"><div class="caplbl">Caption</div><p class="captxt">Refinishing hardwood floors instead of replacing them can save time and money while bringing back that original beauty.</p></div>
+</div>
+
+<div class="rev" data-day="24">
+  <div class="postcol"><div class="post deep"><div class="baA"><div class="phbox">Before — empty corner</div></div><div class="baB"><img class="fillimg" src="https://lh3.googleusercontent.com/d/1Ckrr29hJ-WvIkCAukiF0iOiMZYdXkjTp=w1200" alt="AFTER — custom built-ins"></div><div class="badiv"></div><span class="balbl a">Before</span><span class="balbl b">After</span><div class="mark" style="top:auto;bottom:16px;right:16px">HHG</div><div class="bahead"><div class="ph ondark" style="font-size:28px">An empty corner, transformed</div></div></div></div>
+  <div class="infocol"><div class="caplbl">Caption · Before/After</div><p class="captxt">Custom built-ins that turned an empty corner into a functional, beautiful feature.</p></div>
+</div>
+
+<div class="rev" data-day="25">
+  <div class="postcol"><div class="post"><div class="slot"><img class="fillimg" src="https://lh3.googleusercontent.com/d/1Dhx-8kD6xaSiz5ZBDdY-Py1Iwp3ZXjU1=w1200" alt="Carpentry build"></div><div class="scrim b"></div><div class="mark">HHG</div><div class="pc"><div class="push"><div class="ph ondark" style="font-size:44px">Tag someone who's been talking about remodeling 👀</div><div class="psub ondarksub" style="margin-top:10px;font-size:14px">This one's for them.</div></div></div></div></div>
+  <div class="infocol"><div class="caplbl">Caption · Engagement</div><p class="captxt">Tag a friend or family member who's been talking about remodeling their home — this one's for them!</p></div>
+</div>
+
+<div class="rev" data-day="26" data-type="video">
+  <div class="postcol"><div class="post"><div class="slot"><img class="fillimg" src="https://lh3.googleusercontent.com/d/1hHV8T3rAp6mgW4d5OkFZnapI4pRaSZ1S=w1200" alt="Floors + carpentry — video still"></div><div class="scrim t"></div><div class="scrim b"></div><div class="mark">HHG</div><div class="pc"><div style="margin:auto"><div class="play"><div class="playtri"></div></div></div><div><div class="pk ondarksub" style="color:#F2B84B">Weekly Highlight · Wk 4</div><div class="ph ondark" style="font-size:32px">Flooring &amp; custom carpentry</div><div class="psub ondarksub" style="margin-top:8px;font-size:14px">Craftsmanship in every detail</div></div></div></div></div>
+  <div class="infocol"><div class="caplbl">Caption · Highlight Video</div><p class="captxt">From floors to custom builds, it's all about the craftsmanship. Check out our latest flooring and carpentry work.</p></div>
+</div>
+
+<div class="rev" data-day="27">
+  <div class="postcol"><div class="post"><div class="slot"><img class="fillimg" src="https://lh3.googleusercontent.com/d/1Ckrr29hJ-WvIkCAukiF0iOiMZYdXkjTp=w1200" alt="Custom shelving"></div><div class="scrim b"></div><div class="mark">HHG</div><div class="pc"><div class="push"><div class="stars">★★★★★</div><div class="qtext" style="margin-top:8px;font-size:22px">The custom shelving they built is exactly what our living room needed.</div><div class="qby">— A happy HHG homeowner</div></div></div></div></div>
+  <div class="infocol"><div class="caplbl">Caption · Testimonial</div><p class="captxt">"The custom shelving they built is exactly what our living room needed." Thank you for letting us bring your vision to life!</p></div>
+</div>
+
+<div class="rev" data-day="28">
+  <div class="postcol"><div class="post"><div class="slot"><img class="fillimg" src="https://lh3.googleusercontent.com/d/1g6v7w4wAxtT2pyuqVsxhWTf6cFrZuM2l=w1200" alt="Community / team photo"></div><div class="scrim b"></div><div class="mark">HHG</div><div class="pc"><div class="push"><div class="ph ondark" style="font-size:40px">To the homes we've transformed &amp; the relationships we've built</div></div></div></div></div>
+  <div class="infocol"><div class="caplbl">Caption</div><p class="captxt">Grateful for another great month serving Hamilton and Mercer County. Here's to the homes we've transformed and the relationships we've built.</p></div>
+</div>
+
+<div class="weekban"><span class="wknum">FINAL DAYS</span><span class="wkfocus">Month-End Wrap-Up</span><span class="wkdays">Days 29–30</span></div>
+
+<div class="rev" data-day="29">
+  <div class="postcol"><div class="post"><div class="slot"><div class="phbox">Team photo</div></div><div class="scrim b"></div><div class="mark">HHG</div><div class="pc"><div class="push"><div class="pk ondarksub" style="color:#F2B84B">To every client, neighbor &amp; follower</div><div class="ph ondark" style="font-size:44px">Thank you — we don't take it for granted</div></div></div></div></div>
+  <div class="infocol"><div class="caplbl">Caption</div><p class="captxt">To every client, neighbor, and follower who's supported HHG this month — thank you. We don't take it for granted.</p></div>
+</div>
+
+<div class="rev" data-day="30">
+  <div class="postcol"><div class="post deep"><div class="mark">HHG</div><div style="position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:3px;z-index:1"><img class="gridimg" src="https://lh3.googleusercontent.com/d/1FpGoXfT-ptzefAWVxpaS9lr1bBHgs1jB=w800" alt="Top project 1"><img class="gridimg" src="https://lh3.googleusercontent.com/d/1u2ANz8wMkHu22MdytTWiUtHqIG29GPKN=w800" alt="Top project 2"><img class="gridimg" src="https://lh3.googleusercontent.com/d/1XHGxMomY36SPwA7vgqhNk5s-APHwXL5w=w800" alt="Top project 3"><img class="gridimg" src="https://lh3.googleusercontent.com/d/1Ckrr29hJ-WvIkCAukiF0iOiMZYdXkjTp=w800" alt="Top project 4"></div><div class="scrim b" style="z-index:2"></div><div class="pc"><div class="push"><div class="ph ondark" style="font-size:46px">What a month!</div><div class="psub ondarksub" style="margin-top:10px;font-size:15px">Swipe our favorite transformations — which is yours?</div></div></div></div></div>
+  <div class="infocol"><div class="caplbl">Caption · Recap</div><p class="captxt">What a month! Swipe through some of our favorite transformations and tell us which one is your favorite.</p></div>
+</div>
+
+<div class="sectitle">Weekly Highlight Videos — Storyboards</div>
+<p class="sbmeta" style="max-width:760px">These four short videos anchor each week (posted on Days 5, 12, 19 &amp; 26). Below is the shot-by-shot plan for each. Approve the concept or tell us what you'd like changed.</p>
+
+<div class="rev" data-vid="VID 1" data-vlabel="Video 1 · Kitchen (Day 5)">
+  <div class="infocol" style="grid-column:1/-1">
+    <div class="daybadge"><span class="dnum">Video 1 · Kitchen</span><span class="dtype vid">Day 5</span></div>
+    <p class="sbmeta"><b>20–30 sec spotlight</b>, from "before" chaos to "after" reveal. On-screen text: "From outdated to unforgettable." · "Hamilton, NJ Kitchen Remodel"</p>
+    <div class="frames">
+      <div class="frame"><div class="fbox"><div class="phbox" style="font-size:12px">Wide before</div><span class="fnum">1</span><div class="fovr"><span class="fostext">From outdated…</span></div></div><p class="fdesc"><b>Wide before</b>Dated kitchen, full room</p></div>
+      <div class="frame"><div class="fbox"><div class="phbox" style="font-size:12px">Install montage</div><span class="fnum">2</span></div><p class="fdesc"><b>Quick-cut montage</b>Time-lapse of the install</p></div>
+      <div class="frame"><div class="fbox"><img class="gridimg" src="https://lh3.googleusercontent.com/d/1FpGoXfT-ptzefAWVxpaS9lr1bBHgs1jB=w800" alt="Slow pan finished"><span class="fnum">3</span><div class="fovr"><span class="fostext">…to unforgettable</span></div></div><p class="fdesc"><b>Slow pan</b>Reveal of finished kitchen</p></div>
+      <div class="frame"><div class="fbox"><div class="phbox" style="font-size:12px">Detail close-ups</div><span class="fnum">4</span></div><p class="fdesc"><b>Close-ups</b>Counters, cabinetry, hardware</p></div>
+      <div class="frame"><div class="fbox endcard"><span class="em">📞</span><span>(609) 917-3472</span><span class="fnum">5</span></div><p class="fdesc"><b>End card</b>Logo + call CTA</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="rev" data-vid="VID 2" data-vlabel="Video 2 · Bathroom (Day 12)">
+  <div class="infocol" style="grid-column:1/-1">
+    <div class="daybadge"><span class="dnum">Video 2 · Bathroom</span><span class="dtype vid">Day 12</span></div>
+    <p class="sbmeta"><b>Before/after spotlight</b> emphasizing a "spa-like retreat" feeling. On-screen text: "Your everyday spa, right at home."</p>
+    <div class="frames">
+      <div class="frame"><div class="fbox"><img class="gridimg" src="https://lh3.googleusercontent.com/d/1xLaH36u-PNS5PAWxpK1AYuoWv47iNNRN=w800" alt="Before dated bath"><span class="fnum">1</span></div><p class="fdesc"><b>Before</b>Dated bathroom</p></div>
+      <div class="frame"><div class="fbox"><img class="gridimg" src="https://lh3.googleusercontent.com/d/1gnAvgvPzA_YSBL9lmlnVm590Z4GaSzEt=w800" alt="Install montage"><span class="fnum">2</span></div><p class="fdesc"><b>Montage</b>Tile, vanity, fixtures</p></div>
+      <div class="frame"><div class="fbox"><img class="gridimg" src="https://lh3.googleusercontent.com/d/1n5-o2RVLJJztOFUpRV-JHcTsxUXOZzAs=w800" alt="Finished reveal"><span class="fnum">3</span><div class="fovr"><span class="fostext">Your everyday spa</span></div></div><p class="fdesc"><b>Reveal</b>Finished, soft lighting</p></div>
+      <div class="frame"><div class="fbox"><img class="gridimg" src="https://lh3.googleusercontent.com/d/1gz_cpu854RwALabhB1ILFf3N2QuR1LhJ=w800" alt="Detail shots"><span class="fnum">4</span></div><p class="fdesc"><b>Details</b>Tile, shower glass, vanity</p></div>
+      <div class="frame"><div class="fbox endcard"><span class="em">🛁</span><span>Book a consult</span><span class="fnum">5</span></div><p class="fdesc"><b>End card</b>Logo + CTA</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="rev" data-vid="VID 3" data-vlabel="Video 3 · Painting (Day 19)">
+  <div class="infocol" style="grid-column:1/-1">
+    <div class="daybadge"><span class="dnum">Video 3 · Painting</span><span class="dtype vid">Day 19</span></div>
+    <p class="sbmeta"><b>Side-by-side</b> of an interior room and an exterior project done the same month. On-screen text: "A fresh coat changes everything."</p>
+    <div class="frames">
+      <div class="frame"><div class="fbox"><div class="phbox" style="font-size:12px">Prep work</div><span class="fnum">1</span></div><p class="fdesc"><b>Prep</b>Taping, tarps</p></div>
+      <div class="frame"><div class="fbox"><div class="phbox" style="font-size:12px">Painters at work</div><span class="fnum">2</span></div><p class="fdesc"><b>In progress</b>Painters at work</p></div>
+      <div class="frame"><div class="fbox"><div class="phbox" style="font-size:12px">Finished interior</div><span class="fnum">3</span><div class="fovr"><span class="fostext">A fresh coat…</span></div></div><p class="fdesc"><b>Interior</b>Finished room</p></div>
+      <div class="frame"><div class="fbox"><div class="phbox" style="font-size:12px">Finished exterior</div><span class="fnum">4</span><div class="fovr"><span class="fostext">…changes everything</span></div></div><p class="fdesc"><b>Exterior</b>Curb-appeal shot</p></div>
+      <div class="frame"><div class="fbox endcard"><span class="em">🎨</span><span>Free estimate</span><span class="fnum">5</span></div><p class="fdesc"><b>End card</b>Logo + CTA</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="rev" data-vid="VID 4" data-vlabel="Video 4 · Flooring & Carpentry (Day 26)">
+  <div class="infocol" style="grid-column:1/-1">
+    <div class="daybadge"><span class="dnum">Video 4 · Flooring &amp; Carpentry</span><span class="dtype vid">Day 26</span></div>
+    <p class="sbmeta"><b>Showcase craftsmanship</b> — refinished hardwood + a custom built-in. On-screen text: "Craftsmanship in every detail."</p>
+    <div class="frames">
+      <div class="frame"><div class="fbox"><div class="phbox" style="font-size:12px">Sanding close-up</div><span class="fnum">1</span></div><p class="fdesc"><b>Refinishing</b>Sanding close-up</p></div>
+      <div class="frame"><div class="fbox"><div class="phbox" style="font-size:12px">Glossy finished floor</div><span class="fnum">2</span></div><p class="fdesc"><b>Reveal</b>Glossy finished floor</p></div>
+      <div class="frame"><div class="fbox"><img class="gridimg" src="https://lh3.googleusercontent.com/d/1Dhx-8kD6xaSiz5ZBDdY-Py1Iwp3ZXjU1=w800" alt="Carpentry build"><span class="fnum">3</span><div class="fovr"><span class="fostext">Craftsmanship…</span></div></div><p class="fdesc"><b>Build montage</b>Custom carpentry</p></div>
+      <div class="frame"><div class="fbox"><img class="gridimg" src="https://lh3.googleusercontent.com/d/1g6v7w4wAxtT2pyuqVsxhWTf6cFrZuM2l=w800" alt="Finished built-in"><span class="fnum">4</span><div class="fovr"><span class="fostext">…in every detail</span></div></div><p class="fdesc"><b>Finished</b>Built-in reveal</p></div>
+      <div class="frame"><div class="fbox endcard"><span class="em">🔨</span><span>See our work</span><span class="fnum">5</span></div><p class="fdesc"><b>End card</b>Logo + CTA</p></div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<!-- submit modal -->
+<div class="modal" id="modal">
+  <div class="mcard">
+    <div class="mhead"><h3>Send your review</h3><p>Add your name, then email or copy your approvals back to Hammer Head Group.</p></div>
+    <div class="mbody">
+      <label class="mlbl first" for="mName">Your name</label>
+      <input class="minput" id="mName" type="text" placeholder="Who's reviewing? (e.g. JC — Hammer Head Group)">
+      <label class="mlbl" for="mOverall">Overall comments <span class="opt">(optional)</span></label>
+      <textarea class="minput mta" id="mOverall" placeholder="Anything about the month as a whole…"></textarea>
+      <label class="mlbl" for="reportBox">Summary being sent</label>
+      <textarea class="report" id="reportBox" readonly></textarea>
+    </div>
+    <div class="mfoot">
+      <button class="mbtn primary" id="btnEmail">Email to HHG</button>
+      <button class="mbtn ghost" id="btnCopy">Copy</button>
+      <button class="mbtn ghost" id="btnDownload">Download</button>
+      <span class="copied" id="copiedMsg">Copied!</span>
+      <button class="mbtn close" id="btnClose">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var KEY='hhg-approval-artifact-v1';
+  var EMAIL='youraistarr@gmail.com';
+  var st={}, meta={name:'',overall:''};
+  try{var s=JSON.parse(localStorage.getItem(KEY)||'{}');st=s.items||{};meta=s.meta||{name:'',overall:''};}catch(e){}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify({items:st,meta:meta}));}catch(e){}}
+
+  // Failed external images (blocked here) degrade to a labelled navy card.
+  Array.prototype.forEach.call(document.querySelectorAll('img.fillimg, img.gridimg'),function(im){
+    im.addEventListener('error',function(){
+      var d=document.createElement('div');d.className='phbox';
+      if(im.classList.contains('gridimg')){d.style.position='relative';d.style.width='100%';d.style.height='100%';}
+      if(im.parentNode)im.parentNode.replaceChild(d,im);
+    });
+  });
+
+  var items=[];
+  var WEEK=[[1,7,'Kitchen Remodeling'],[8,14,'Bathroom Remodeling'],[15,21,'Interior & Exterior Painting'],[22,28,'Flooring & Custom Carpentry'],[29,30,'Month-End Wrap-Up']];
+  function focusFor(n){for(var i=0;i<WEEK.length;i++){if(n>=WEEK[i][0]&&n<=WEEK[i][1])return WEEK[i][2];}return '';}
+
+  function attach(el,id,label){
+    var box=document.createElement('div');box.className='approve';
+    box.innerHTML='<div class="aprompt">Your decision</div><div class="btnrow"><button class="apbtn okb" type="button">✓ Approve</button><button class="apbtn nob" type="button">✎ Request edits</button></div><div class="editwrap"><div class="editlbl">What would you like changed?</div><textarea class="editnote" placeholder="e.g. swap the photo, shorten the headline, change the wording…"></textarea></div>';
+    var infocol=el.querySelector('.infocol');infocol.appendChild(box);
+    var okBtn=box.querySelector('.okb'),noBtn=box.querySelector('.nob'),note=box.querySelector('.editnote');
+    note.value=(st[id]&&st[id].note)||'';
+    function paint(){var c=st[id]||{};el.classList.toggle('is-ok',c.status==='ok');el.classList.toggle('is-no',c.status==='no');}
+    okBtn.onclick=function(){var c=st[id]||{};c.status=c.status==='ok'?undefined:'ok';st[id]=c;save();paint();count();};
+    noBtn.onclick=function(){var c=st[id]||{};c.status=c.status==='no'?undefined:'no';st[id]=c;save();paint();count();if(st[id].status==='no')note.focus();};
+    note.oninput=function(){var c=st[id]||{};c.note=note.value;st[id]=c;save();};
+    items.push({id:id,label:label});paint();
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll('.rev[data-day]'),function(el){
+    var day=el.getAttribute('data-day');var n=parseInt(day,10);var isVideo=el.getAttribute('data-type')==='video';
+    var info=el.querySelector('.infocol');var badge=document.createElement('div');badge.className='daybadge';
+    badge.innerHTML='<span class="dnum">Day '+day+'</span><span class="dfocus">'+focusFor(n)+'</span>'+(isVideo?'<span class="dtype vid">Highlight Video</span>':'<span class="dtype">Post</span>');
+    info.insertBefore(badge,info.firstChild);
+    attach(el,'day-'+day,'Day '+day+(isVideo?' (Highlight Video)':''));
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('.rev[data-vid]'),function(el){
+    var id='vid-'+el.getAttribute('data-vid');var label=el.getAttribute('data-vlabel')||el.getAttribute('data-vid');attach(el,id,label);
+  });
+
+  var cOk=document.getElementById('cOk'),cNo=document.getElementById('cNo'),cPd=document.getElementById('cPd');
+  function count(){var ok=0,no=0;items.forEach(function(it){var s=st[it.id]||{};if(s.status==='ok')ok++;else if(s.status==='no')no++;});cOk.textContent=ok;cNo.textContent=no;cPd.textContent=items.length-ok-no;}
+  count();
+
+  var nameEl=document.getElementById('mName'),overallEl=document.getElementById('mOverall');
+  nameEl.value=meta.name||'';overallEl.value=meta.overall||'';
+  nameEl.oninput=function(){meta.name=nameEl.value;save();refreshReport();};
+  overallEl.oninput=function(){meta.overall=overallEl.value;save();refreshReport();};
+
+  function buildReport(){
+    var ok=0,no=0,pd=0,body=[];
+    items.forEach(function(it){var s=st[it.id]||{};
+      if(s.status==='ok'){ok++;body.push('[APPROVED]  '+it.label);}
+      else if(s.status==='no'){no++;body.push('[EDITS]     '+it.label+(s.note&&s.note.trim()?'\n            -> '+s.note.trim():'\n            -> (no note added)'));}
+      else{pd++;body.push('[PENDING]   '+it.label);}
+    });
+    var head=['HAMMER HEAD GROUP — 30-DAY SOCIAL MEDIA REVIEW','Reviewer: '+(meta.name||'(not provided)'),'Submitted: '+new Date().toLocaleString(),'','SUMMARY: '+ok+' approved  |  '+no+' need edits  |  '+pd+' pending','------------------------------------------------------------'];
+    if(meta.overall&&meta.overall.trim()){head.push('OVERALL COMMENTS:',meta.overall.trim(),'------------------------------------------------------------');}
+    head.push('');
+    return head.concat(body).join('\n');
+  }
+
+  var modal=document.getElementById('modal'),reportBox=document.getElementById('reportBox'),copiedMsg=document.getElementById('copiedMsg');
+  function refreshReport(){reportBox.value=buildReport();}
+  function openModal(){refreshReport();modal.classList.add('open');}
+  function closeModal(){modal.classList.remove('open');}
+  document.getElementById('sendTop').onclick=openModal;
+  document.getElementById('btnClose').onclick=closeModal;
+  modal.onclick=function(e){if(e.target===modal)closeModal();};
+
+  document.getElementById('btnCopy').onclick=function(){
+    refreshReport();reportBox.select();
+    var done=function(){copiedMsg.classList.add('show');setTimeout(function(){copiedMsg.classList.remove('show');},1800);};
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(reportBox.value).then(done,function(){try{document.execCommand('copy');done();}catch(e){}});}
+    else{try{document.execCommand('copy');done();}catch(e){}}
+  };
+  document.getElementById('btnEmail').onclick=function(){
+    refreshReport();
+    var url='mailto:'+EMAIL+'?subject='+encodeURIComponent('Hammer Head Group — Social Media Review')+'&body='+encodeURIComponent(reportBox.value);
+    try{window.open(url,'_blank');}catch(e){window.location.href=url;}
+  };
+  document.getElementById('btnDownload').onclick=function(){
+    refreshReport();
+    var blob=new Blob([reportBox.value],{type:'text/plain'});
+    var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='HHG-social-review.txt';document.body.appendChild(a);a.click();document.body.removeChild(a);
+  };
+})();
+
+</script>
+</body>
+</html>
