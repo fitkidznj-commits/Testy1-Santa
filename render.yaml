@@ -1,0 +1,32 @@
+# One-click deploy blueprint for Render (https://render.com).
+# In Render: New > Blueprint > connect this repo. It reads this file.
+services:
+  - type: web
+    name: hhg-social-approval
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /healthz
+    envVars:
+      - key: NOTIFY_EMAIL
+        value: youraistarr@gmail.com
+      - key: ADMIN_KEY
+        generateValue: true      # Render generates a secret; view it in the dashboard
+      - key: DATA_DIR
+        value: /var/data
+      # Set these in the Render dashboard to enable email notifications:
+      - key: SMTP_HOST
+        sync: false
+      - key: SMTP_PORT
+        sync: false
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASS
+        sync: false
+      - key: SMTP_FROM
+        sync: false
+    disk:
+      name: hhg-data
+      mountPath: /var/data
+      sizeGB: 1

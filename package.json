@@ -1,0 +1,17 @@
+{
+  "name": "hhg-social-approval",
+  "version": "1.0.0",
+  "description": "Hammer Head Group 30-day social media approval site with central storage and email notifications",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "nodemailer": "^6.9.16"
+  }
+}

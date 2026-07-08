@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HHG Review — Admin Dashboard</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#EFEADF;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;color:#16233F}
+.bar{background:#052A6E;color:#EFEADF;padding:16px 26px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.bar h1{margin:0;font-size:20px;letter-spacing:.5px}
+.bar .sp{flex:1}
+.wrap{max-width:920px;margin:0 auto;padding:24px}
+.gate{background:#fff;border:1px solid #e2dccd;border-radius:14px;padding:24px;max-width:420px;margin:60px auto}
+.gate input{width:100%;padding:11px 13px;border:1.5px solid #d9d2c4;border-radius:10px;font-size:15px;margin:12px 0}
+.gate button,.btn{background:#E4211F;color:#fff;border:none;border-radius:10px;padding:11px 18px;font-weight:700;cursor:pointer;font-size:14px}
+.btn.ghost{background:#fff;color:#052A6E;border:1.5px solid #c7bfae}
+.summary{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:20px}
+.kpi{background:#fff;border:1px solid #e2dccd;border-radius:12px;padding:14px 20px;flex:1;min-width:130px}
+.kpi b{display:block;font-size:30px;line-height:1}
+.kpi.ok b{color:#1E7A46}.kpi.no b{color:#E4211F}.kpi.pd b{color:#C68A45}
+.kpi span{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:#8a94a3;font-weight:700}
+.card{background:#fff;border:1px solid #e2dccd;border-radius:12px;padding:6px 0;margin-bottom:22px}
+.row{display:flex;align-items:flex-start;gap:12px;padding:11px 18px;border-bottom:1px solid #f0ebde}
+.row:last-child{border-bottom:none}
+.tag{font-size:11px;font-weight:800;letter-spacing:.5px;padding:3px 9px;border-radius:14px;white-space:nowrap;margin-top:1px}
+.tag.ok{background:#EDF6EF;color:#1E7A46}.tag.no{background:#FCEDEC;color:#E4211F}.tag.pd{background:#f1eee4;color:#8a94a3}
+.row .lbl{font-weight:700;min-width:150px}
+.row .note{color:#41485a;font-size:14px;line-height:1.5}
+.sect{font-size:13px;text-transform:uppercase;letter-spacing:2px;color:#8a94a3;font-weight:800;margin:26px 0 10px}
+.rev{background:#fff;border:1px solid #e2dccd;border-radius:12px;padding:16px 20px;margin-bottom:14px}
+.rev h3{margin:0 0 4px}
+.rev .meta{font-size:13px;color:#8a94a3}
+.rev .ov{margin-top:8px;background:#f7f4ec;border-radius:8px;padding:10px 12px;font-size:14px;line-height:1.5;white-space:pre-wrap}
+.empty{color:#8a94a3;padding:20px;text-align:center}
+.err{color:#E4211F;margin-top:10px}
+small.hint{color:#8a94a3}
+</style>
+</head>
+<body>
+<div class="bar"><h1>HHG Review · Admin</h1><span class="sp"></span><button class="btn ghost" id="refresh" style="display:none">Refresh</button></div>
+<div class="wrap">
+  <div class="gate" id="gate">
+    <h2 style="margin:0 0 4px">Enter admin key</h2>
+    <small class="hint">The key set in the server's <code>ADMIN_KEY</code> environment variable.</small>
+    <input type="password" id="key" placeholder="Admin key" autofocus>
+    <button id="enter">View dashboard</button>
+    <div class="err" id="err"></div>
+  </div>
+  <div id="dash" style="display:none"></div>
+</div>
+<script>
+var LABELS={};
+var WEEK=[[1,7,'Kitchen Remodeling'],[8,14,'Bathroom Remodeling'],[15,21,'Interior & Exterior Painting'],[22,28,'Flooring & Custom Carpentry'],[29,30,'Month-End Wrap-Up']];
+for(var d=1;d<=30;d++){var dd=('0'+d).slice(-2);LABELS['day-'+dd]='Day '+dd;}
+LABELS['vid-VID 1']='Video 1 · Kitchen (Day 5)';LABELS['vid-VID 2']='Video 2 · Bathroom (Day 12)';
+LABELS['vid-VID 3']='Video 3 · Painting (Day 19)';LABELS['vid-VID 4']='Video 4 · Flooring & Carpentry (Day 26)';
+var ORDER=Object.keys(LABELS);
+
+function esc(s){return String(s==null?'':s).replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];});}
+
+var key='';
+function load(){
+  fetch('/api/admin?key='+encodeURIComponent(key)).then(function(r){
+    if(r.status===401)throw new Error('Wrong key');
+    return r.json();
+  }).then(render).catch(function(e){
+    document.getElementById('err').textContent=e.message||'Error';
+  });
+}
+function render(data){
+  document.getElementById('gate').style.display='none';
+  document.getElementById('dash').style.display='';
+  document.getElementById('refresh').style.display='';
+  var items=data.items||{};
+  var ok=0,no=0,pd=0;
+  var rows='';
+  ORDER.forEach(function(id){
+    var s=items[id]||{};
+    var cls=s.status==='ok'?'ok':(s.status==='no'?'no':'pd');
+    var tag=s.status==='ok'?'Approved':(s.status==='no'?'Needs edits':'Pending');
+    if(s.status==='ok')ok++;else if(s.status==='no')no++;else pd++;
+    rows+='<div class="row"><span class="tag '+cls+'">'+tag+'</span><span class="lbl">'+esc(LABELS[id]||id)+'</span><span class="note">'+(s.note?esc(s.note):'')+'</span></div>';
+  });
+  var subs=(data.submissions||[]).slice().reverse();
+  var subHtml=subs.length?subs.map(function(x){
+    return '<div class="rev"><h3>'+esc(x.name||'(no name)')+'</h3><div class="meta">'+new Date(x.at).toLocaleString()+' · '+x.counts.approved+' approved, '+x.counts.edits+' need edits, '+x.counts.pending+' pending</div>'+(x.overall?'<div class="ov">'+esc(x.overall)+'</div>':'')+'</div>';
+  }).join(''):'<div class="empty">No formal submissions yet. Live decisions above update as the client works.</div>';
+
+  document.getElementById('dash').innerHTML=
+    '<div class="summary">'+
+      '<div class="kpi ok"><b>'+ok+'</b><span>Approved</span></div>'+
+      '<div class="kpi no"><b>'+no+'</b><span>Need edits</span></div>'+
+      '<div class="kpi pd"><b>'+pd+'</b><span>Pending</span></div>'+
+    '</div>'+
+    (data.reviewer&&(data.reviewer.name||data.reviewer.overall)?'<div class="rev"><h3>'+esc(data.reviewer.name||'(no name yet)')+'</h3><div class="meta">Current reviewer</div>'+(data.reviewer.overall?'<div class="ov">'+esc(data.reviewer.overall)+'</div>':'')+'</div>':'')+
+    '<div class="sect">Live decisions</div><div class="card">'+rows+'</div>'+
+    '<div class="sect">Submissions ('+subs.length+')</div>'+subHtml;
+}
+document.getElementById('enter').onclick=function(){key=document.getElementById('key').value.trim();load();};
+document.getElementById('key').addEventListener('keydown',function(e){if(e.key==='Enter'){key=this.value.trim();load();}});
+document.getElementById('refresh').onclick=load;
+</script>
+</body>
+</html>

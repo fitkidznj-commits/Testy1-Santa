@@ -136,6 +136,17 @@ a{color:#E4211F}a:hover{color:#b81417}
 .mbtn.close{margin-left:auto;background:transparent;color:#8a94a3}
 .copied{font-size:13px;color:#1E7A46;font-weight:700;font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:1px;opacity:0;transition:.2s}
 .copied.show{opacity:1}
+.mlbl{display:block;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#8a94a3;margin:16px 0 6px}
+.mlbl.first{margin-top:0}
+.mlbl .opt{color:#c7bfae}
+.minput{width:100%;border:1.5px solid #d9d2c4;border-radius:10px;padding:10px 12px;font-family:'Barlow',sans-serif;font-size:15px;color:#16233F;background:#fff}
+.minput:focus{outline:none;border-color:#052A6E;box-shadow:0 0 0 3px rgba(5,42,110,.1)}
+.mta{min-height:64px;resize:vertical;line-height:1.5}
+.msuccess{padding:26px;background:#EDF6EF;color:#1E7A46;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:18px;letter-spacing:.5px;text-align:center}
+.msuccess small{display:block;margin-top:6px;font-weight:600;font-size:13px;color:#3a7a54;font-family:'Barlow',sans-serif;letter-spacing:0}
+.savehint{position:fixed;bottom:16px;left:16px;z-index:80;background:#052A6E;color:#EFEADF;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;letter-spacing:1px;text-transform:uppercase;padding:7px 14px;border-radius:16px;opacity:0;transition:.25s;pointer-events:none}
+.savehint.show{opacity:.94}
+.offline{background:#FCEDEC!important}
 
 @media(max-width:820px){
   .rev{grid-template-columns:1fr;gap:22px}
@@ -151,7 +162,7 @@ a{color:#E4211F}a:hover{color:#b81417}
 <div class="tracker">
   <span class="tstat ok"><b id="cOk">0</b>Approved</span>
   <span class="tstat no"><b id="cNo">0</b>Need edits</span>
-  <span class="tstat pd"><b id="cPd">34</b>Pending</span>
+  <span class="tstat pd"><b id="cPd">0</b>Pending</span>
   <span class="tspacer"></span>
   <button class="sendbtn" id="sendTop">Review &amp; Send Results</button>
 </div>
@@ -399,36 +410,70 @@ a{color:#E4211F}a:hover{color:#b81417}
 
 </div>
 
-<!-- report modal -->
+<!-- submit modal -->
 <div class="modal" id="modal">
   <div class="mcard">
-    <div class="mhead"><h3>Your Review Summary</h3><p>Copy this, or use the buttons below to email it back to Hammer Head Group.</p></div>
-    <div class="mbody"><textarea class="report" id="reportBox" readonly></textarea></div>
-    <div class="mfoot">
-      <button class="mbtn primary" id="btnEmail">Email to HHG</button>
-      <button class="mbtn ghost" id="btnCopy">Copy to clipboard</button>
+    <div class="mhead"><h3>Submit your review</h3><p>Send your approvals and notes to Hammer Head Group. Your choices are already saved — this delivers them.</p></div>
+    <div class="mbody" id="mForm">
+      <label class="mlbl first" for="mName">Your name</label>
+      <input class="minput" id="mName" type="text" placeholder="Who's reviewing? (e.g. JC — Hammer Head Group)">
+      <label class="mlbl" for="mOverall">Overall comments <span class="opt">(optional)</span></label>
+      <textarea class="minput mta" id="mOverall" placeholder="Anything about the month as a whole — themes, scheduling, general direction…"></textarea>
+      <label class="mlbl" for="reportBox">Summary being sent</label>
+      <textarea class="report" id="reportBox" readonly></textarea>
+    </div>
+    <div class="mfoot" id="mFoot">
+      <button class="mbtn primary" id="btnSubmit">Submit review</button>
+      <button class="mbtn ghost" id="btnCopy">Copy</button>
       <button class="mbtn ghost" id="btnDownload">Download</button>
       <span class="copied" id="copiedMsg">Copied!</span>
       <button class="mbtn close" id="btnClose">Close</button>
     </div>
+    <div class="msuccess" id="mSuccess" style="display:none"></div>
   </div>
 </div>
+<div class="savehint" id="saveHint">Saved</div>
 
 <script>
 (function(){
-  var KEY='hhg-approval-v2';
-  var EMAIL='youraistarr@gmail.com';
-  var st={};
-  try{st=JSON.parse(localStorage.getItem(KEY)||'{}');}catch(e){st={};}
-  function save(){try{localStorage.setItem(KEY,JSON.stringify(st));}catch(e){}}
+  // Central state, loaded from and saved to the server.
+  var st={};                 // { itemId: {status, note} }
+  var reviewer={name:'',overall:''};
+  var items=[];              // {id,label,el,note,paint}
+  var byId={};
 
-  var items=[]; // {id,label,el}
   var WEEK=[[1,7,'Kitchen Remodeling'],[8,14,'Bathroom Remodeling'],[15,21,'Interior & Exterior Painting'],[22,28,'Flooring & Custom Carpentry'],[29,30,'Month-End Wrap-Up']];
   function focusFor(n){for(var i=0;i<WEEK.length;i++){if(n>=WEEK[i][0]&&n<=WEEK[i][1])return WEEK[i][2];}return '';}
 
-  function attach(el,id,label,badgeHost,isVideo){
-    var s=st[id]||{};
-    // build approval controls
+  var hintEl=document.getElementById('saveHint');
+  var hintT;
+  function flash(txt,bad){
+    hintEl.textContent=txt||'Saved';
+    hintEl.classList.toggle('offline',!!bad);
+    hintEl.classList.add('show');
+    clearTimeout(hintT);
+    hintT=setTimeout(function(){hintEl.classList.remove('show');},1400);
+  }
+  // POST/PUT helper with graceful failure messaging.
+  function api(method,url,body){
+    return fetch(url,{method:method,headers:{'Content-Type':'application/json'},body:body?JSON.stringify(body):undefined})
+      .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();});
+  }
+  function saveItem(id){
+    var c=st[id]||{};
+    api('PUT','/api/item/'+encodeURIComponent(id),{status:c.status||null,note:c.note||''})
+      .then(function(){flash('Saved');},function(){flash('Not saved — check connection',true);});
+  }
+  var revT;
+  function saveReviewer(){
+    clearTimeout(revT);
+    revT=setTimeout(function(){
+      api('POST','/api/reviewer',{name:reviewer.name,overall:reviewer.overall})
+        .then(function(){flash('Saved');},function(){flash('Not saved — check connection',true);});
+    },500);
+  }
+
+  function attach(el,id,label){
     var box=document.createElement('div');
     box.className='approve';
     box.innerHTML=''+
@@ -444,19 +489,21 @@ a{color:#E4211F}a:hover{color:#b81417}
     var infocol=el.querySelector('.infocol');
     infocol.appendChild(box);
     var okBtn=box.querySelector('.okb'), noBtn=box.querySelector('.nob'), note=box.querySelector('.editnote');
-    note.value=s.note||'';
     function paint(){
-      el.classList.toggle('is-ok',st[id]&&st[id].status==='ok');
-      el.classList.toggle('is-no',st[id]&&st[id].status==='no');
+      var c=st[id]||{};
+      el.classList.toggle('is-ok',c.status==='ok');
+      el.classList.toggle('is-no',c.status==='no');
+      if(note.value!==(c.note||''))note.value=c.note||'';
     }
-    okBtn.onclick=function(){var c=st[id]||{};if(c.status==='ok'){delete c.status;}else{c.status='ok';}st[id]=c;save();paint();count();};
-    noBtn.onclick=function(){var c=st[id]||{};if(c.status==='no'){delete c.status;}else{c.status='no';}st[id]=c;save();paint();count();if(st[id]&&st[id].status==='no'){note.focus();}};
-    note.oninput=function(){var c=st[id]||{};c.note=note.value;st[id]=c;save();};
-    items.push({id:id,label:label,el:el});
-    paint();
+    var noteT;
+    okBtn.onclick=function(){var c=st[id]||{};c.status=c.status==='ok'?undefined:'ok';st[id]=c;paint();count();saveItem(id);};
+    noBtn.onclick=function(){var c=st[id]||{};c.status=c.status==='no'?undefined:'no';st[id]=c;paint();count();saveItem(id);if(st[id].status==='no')note.focus();};
+    note.oninput=function(){var c=st[id]||{};c.note=note.value;st[id]=c;clearTimeout(noteT);noteT=setTimeout(function(){saveItem(id);},600);};
+    var rec={id:id,label:label,el:el,paint:paint};
+    items.push(rec);byId[id]=rec;
   }
 
-  // day cards
+  // Build day cards
   Array.prototype.forEach.call(document.querySelectorAll('.rev[data-day]'),function(el){
     var day=el.getAttribute('data-day');
     var n=parseInt(day,10);
@@ -466,13 +513,13 @@ a{color:#E4211F}a:hover{color:#b81417}
     badge.className='daybadge';
     badge.innerHTML='<span class="dnum">Day '+day+'</span><span class="dfocus">'+focusFor(n)+'</span>'+(isVideo?'<span class="dtype vid">Highlight Video</span>':'<span class="dtype">Post</span>');
     info.insertBefore(badge,info.firstChild);
-    attach(el,'day-'+day,'Day '+day+(isVideo?' (Highlight Video)':''),info,isVideo);
+    attach(el,'day-'+day,'Day '+day+(isVideo?' (Highlight Video)':''));
   });
-  // video storyboard cards
+  // Build video storyboard cards
   Array.prototype.forEach.call(document.querySelectorAll('.rev[data-vid]'),function(el){
     var id='vid-'+el.getAttribute('data-vid');
     var label=el.getAttribute('data-vlabel')||el.getAttribute('data-vid');
-    attach(el,id,label,el.querySelector('.infocol'),true);
+    attach(el,id,label);
   });
 
   var cOk=document.getElementById('cOk'),cNo=document.getElementById('cNo'),cPd=document.getElementById('cPd');
@@ -481,7 +528,20 @@ a{color:#E4211F}a:hover{color:#b81417}
     items.forEach(function(it){var s=st[it.id]||{};if(s.status==='ok')ok++;else if(s.status==='no')no++;});
     cOk.textContent=ok;cNo.textContent=no;cPd.textContent=items.length-ok-no;
   }
-  count();
+
+  // Load saved state from the server, then paint.
+  var nameEl=document.getElementById('mName'), overallEl=document.getElementById('mOverall');
+  function applyState(data){
+    st=(data&&data.items)?data.items:{};
+    reviewer=(data&&data.reviewer)?{name:data.reviewer.name||'',overall:data.reviewer.overall||''}:{name:'',overall:''};
+    items.forEach(function(it){it.paint();});
+    count();
+    nameEl.value=reviewer.name;overallEl.value=reviewer.overall;
+  }
+  fetch('/api/state').then(function(r){return r.json();}).then(applyState).catch(function(){count();});
+
+  nameEl.oninput=function(){reviewer.name=nameEl.value;saveReviewer();};
+  overallEl.oninput=function(){reviewer.overall=overallEl.value;saveReviewer();};
 
   function buildReport(){
     var ok=0,no=0,pd=0,body=[];
@@ -491,28 +551,45 @@ a{color:#E4211F}a:hover{color:#b81417}
       else if(s.status==='no'){no++;body.push('[EDITS]     '+it.label+(s.note&&s.note.trim()?'\n            -> '+s.note.trim():'\n            -> (no note added)'));}
       else{pd++;body.push('[PENDING]   '+it.label);}
     });
-    var head=['HAMMER HEAD GROUP — 30-DAY SOCIAL MEDIA REVIEW','Submitted: '+new Date().toLocaleString(),'','SUMMARY: '+ok+' approved  |  '+no+' need edits  |  '+pd+' pending','------------------------------------------------------------',''];
+    var head=['HAMMER HEAD GROUP — 30-DAY SOCIAL MEDIA REVIEW','Reviewer: '+(reviewer.name||'(not provided)'),'Submitted: '+new Date().toLocaleString(),'','SUMMARY: '+ok+' approved  |  '+no+' need edits  |  '+pd+' pending','------------------------------------------------------------'];
+    if(reviewer.overall&&reviewer.overall.trim()){head.push('OVERALL COMMENTS:',reviewer.overall.trim(),'------------------------------------------------------------');}
+    head.push('');
     return head.concat(body).join('\n');
   }
 
   var modal=document.getElementById('modal'),reportBox=document.getElementById('reportBox'),copiedMsg=document.getElementById('copiedMsg');
-  function openModal(){reportBox.value=buildReport();modal.classList.add('open');}
+  function refreshReport(){reportBox.value=buildReport();}
+  function openModal(){nameEl.value=reviewer.name;overallEl.value=reviewer.overall;refreshReport();document.getElementById('mSuccess').style.display='none';document.getElementById('mForm').style.display='';document.getElementById('mFoot').style.display='';modal.classList.add('open');}
   function closeModal(){modal.classList.remove('open');}
   document.getElementById('sendTop').onclick=openModal;
   document.getElementById('btnClose').onclick=closeModal;
   modal.onclick=function(e){if(e.target===modal)closeModal();};
+  nameEl.addEventListener('input',refreshReport);
+  overallEl.addEventListener('input',refreshReport);
 
+  document.getElementById('btnSubmit').onclick=function(){
+    var btn=this;btn.disabled=true;btn.textContent='Submitting…';
+    reviewer.name=nameEl.value;reviewer.overall=overallEl.value;
+    api('POST','/api/submit',{name:reviewer.name,overall:reviewer.overall,labels:items.map(function(it){return {id:it.id,label:it.label};})})
+      .then(function(res){
+        var su=document.getElementById('mSuccess');
+        su.innerHTML='✓ Review submitted — thank you!<small>'+(res.emailed?'Hammer Head Group has been emailed your feedback.':'Your review has been saved for Hammer Head Group.')+'</small>';
+        su.style.display='';
+        document.getElementById('mForm').style.display='none';
+        document.getElementById('mFoot').style.display='none';
+      },function(){
+        btn.disabled=false;btn.textContent='Submit review';
+        flash('Submit failed — check connection',true);
+      });
+  };
   document.getElementById('btnCopy').onclick=function(){
-    reportBox.select();
+    refreshReport();reportBox.select();
     var done=function(){copiedMsg.classList.add('show');setTimeout(function(){copiedMsg.classList.remove('show');},1800);};
     if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(reportBox.value).then(done,function(){try{document.execCommand('copy');done();}catch(e){}});}
     else{try{document.execCommand('copy');done();}catch(e){}}
   };
-  document.getElementById('btnEmail').onclick=function(){
-    var subject='Hammer Head Group — Social Media Review';
-    window.location.href='mailto:'+EMAIL+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(reportBox.value);
-  };
   document.getElementById('btnDownload').onclick=function(){
+    refreshReport();
     var blob=new Blob([reportBox.value],{type:'text/plain'});
     var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='HHG-social-review.txt';document.body.appendChild(a);a.click();document.body.removeChild(a);
   };
