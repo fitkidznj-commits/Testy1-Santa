@@ -29,11 +29,15 @@ npm start                 # http://localhost:3000
 **Render (recommended, free):**
 1. Push this repo to GitHub (done).
 2. On [render.com](https://render.com): **New → Blueprint**, connect this repo.
-   It reads `render.yaml` and provisions the service + a persistent disk.
+   It reads `render.yaml` and creates the web service.
 3. In the service's **Environment** tab, set `SMTP_*` (see below) to turn on
    email. Note the generated `ADMIN_KEY` under Environment.
 4. Your public URL is `https://<service>.onrender.com`. Share `/` with the
    client; open `/admin` yourself and enter the admin key.
+
+The free plan sleeps after inactivity, so the first visit can take ~30–60s to
+wake — normal, not an error. Free storage is ephemeral (see `render.yaml`);
+the emailed summary on submit is the durable record.
 
 Any Node host works (Railway, Fly.io, a VPS) — just run `npm start` with the
 environment variables below.
@@ -45,7 +49,7 @@ environment variables below.
 | `NOTIFY_EMAIL` | Address emailed on submission (default `youraistarr@gmail.com`) |
 | `ADMIN_KEY` | Password for `/admin` |
 | `SMTP_HOST` / `SMTP_PORT` / `SMTP_USER` / `SMTP_PASS` / `SMTP_FROM` | SMTP for notifications. For Gmail, use an [App Password](https://support.google.com/accounts/answer/185833). |
-| `DATA_DIR` | Where the JSON store is written (use a mounted disk for durability) |
+| `DATA_DIR` | Where the JSON store is written (default `./data`; point at a mounted disk for durability) |
 
 If SMTP is not set, submissions are still stored and shown on `/admin`; they
 just aren't emailed. The client can also Copy/Download their summary as a
