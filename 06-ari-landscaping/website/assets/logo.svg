@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 64" role="img" aria-label="Ari's Landscaping & Paving">
+  <defs>
+    <linearGradient id="leaf" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6FAE5B"/>
+      <stop offset="1" stop-color="#2E5E3A"/>
+    </linearGradient>
+  </defs>
+  <!-- mark: leaf over paver -->
+  <g>
+    <rect x="6" y="36" width="40" height="18" rx="3" fill="#9aa0a6"/>
+    <rect x="6" y="36" width="19" height="18" rx="3" fill="#b9bfc4"/>
+    <path d="M26 38C26 22 12 14 8 10c14 0 30 8 30 24 0 7-5 12-12 12-2 0-4-1-6-2 3 0 6-3 6-6z" fill="url(#leaf)"/>
+  </g>
+  <text x="56" y="30" font-family="Georgia, 'Times New Roman', serif" font-size="22" font-weight="700" fill="#2E5E3A">Ari's</text>
+  <text x="56" y="48" font-family="Arial, Helvetica, sans-serif" font-size="12.5" letter-spacing="1.5" fill="#444">LANDSCAPING &amp; PAVING</text>
+</svg>
